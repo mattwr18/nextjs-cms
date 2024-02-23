@@ -1,0 +1,9 @@
+@import '../../styles/variables';
+
+.pageHeader {
+  @include limit-max-inner-width;
+
+  background-color: $color-gray-light;
+  margin-bottom: $spacing-unit;
+  padding: $spacing-unit-l;
+}
