@@ -1,0 +1,17 @@
+$spacing-unit: 1.75rem;
+$spacing-unit-s: calc(0.5 * $spacing-unit);
+$spacing-unit-l: calc(1.5 * $spacing-unit);
+$grid-max-width: 48rem;
+$nav-bar-height: calc(2.5 * $spacing-unit);
+$font-size: 1.1rem;
+$font-size-s: 0.85em;
+$color-nav-bar: #002332;
+$color-nav-bar-links: rgb(255 255 255 / 80%);
+$color-bg: #fff;
+$color-gray-light: #e9edf0;
+$color-gray-lightest: #f5f6f9;
+
+@mixin limit-max-inner-width {
+  padding-left: calc(max($spacing-unit, (100% - $grid-max-width) / 2));
+  padding-right: calc(max($spacing-unit, (100% - $grid-max-width) / 2));
+}
