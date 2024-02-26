@@ -27,9 +27,9 @@ $line-height: 1.6em;
 $color-text: #333;
 $color-text-light: #656565;
 $font-family:
-  Inter,
-  Helvetica Neue,
-  Helvetica,
+  inter,
+  helvetica neue,
+  helvetica,
   sans-serif;
 
 @mixin limit-max-inner-width($limit: $grid-max-width) {
@@ -42,23 +42,16 @@ $font-family:
   $background-color: $color-primary;
   $border-color: rgb(0 0 0 / 10%);
 
-  -webkit-appearance: none;
-  -moz-appearance: none;
-
   position: relative;
-
   display: inline-block;
   padding: $input-padding;
   padding-left: $spacing-unit;
   padding-right: $spacing-unit;
   border-radius: $border-radius-full;
-
   text-decoration: none;
   background: none;
-  border: none;
   font-weight: 500;
   font-size: calc(1.2 * #{$font-size});
-
   background-color: $background-color;
   color: $text-color;
   border: 1px solid $border-color;
