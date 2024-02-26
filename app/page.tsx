@@ -1,11 +1,15 @@
+import Link from 'next/link';
 import PageHeader from './ui/PageHeader';
 import styles from './page.module.scss';
 
 export default function Page() {
   return (
     <main className={styles.main}>
-      <PageHeader>
+      <PageHeader className={styles.pageHeader}>
         <h1>Guten Morgen, Matthew</h1>
+        <Link href='/' className={styles.newRequestLink}>
+          Neue Frage stellen
+        </Link>
       </PageHeader>
     </main>
   );

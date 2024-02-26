@@ -5,5 +5,46 @@
 
   background-color: $color-gray-light;
   margin-bottom: $spacing-unit;
-  padding: $spacing-unit-l;
+  padding-top: $spacing-unit-l;
+  padding-bottom: $spacing-unit-l;
+
+  .flexBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-unit;
+  }
+
+  .tabBarList {
+    list-style: none;
+    display: flex;
+    align-items: end;
+    margin-top: $spacing-unit-s;
+  }
+
+  .tabBarListItem {
+    display: inline-block;
+    padding: $spacing-unit-xs 0;
+    border-bottom: 2px solid transparent;
+    color: $color-text-light;
+    font-weight: 500;
+    transition: 0.1s all ease-out;
+  }
+
+  .tabBarListItem:not(:last-child) {
+    margin-right: $spacing-unit;
+  }
+
+  .tabBarListItem:not(.TabBar-item--active):hover {
+    border-bottom-color: $color-gray;
+    color: $color-text;
+  }
+
+  .tabBarButtons {
+    @include button-styles($modifier: inline);
+  }
+
+  .tabBarListItem:nth-child(n + 4):last-child {
+    margin-left: calc(#{$spacing-unit-xl} * 1.5);
+  }
 }

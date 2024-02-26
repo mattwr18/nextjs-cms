@@ -1,0 +1,9 @@
+@import '../../styles/variables';
+
+.main {
+  header:first-child {
+    @include limit-max-inner-width($limit: $grid-max-width-l);
+
+    margin-bottom: $spacing-unit-l;
+  }
+}

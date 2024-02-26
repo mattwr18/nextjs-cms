@@ -3,4 +3,20 @@
 .main {
   height: 100vh;
   background-color: $color-gray-lightest;
+
+  .pageHeader {
+    @include limit-max-inner-width($limit: $grid-max-width-l);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-unit;
+    background-color: inherit;
+    padding-bottom: 0;
+    padding-top: $spacing-unit-xl;
+  }
+
+  .newRequestLink {
+    @include button-styles;
+  }
 }
