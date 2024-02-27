@@ -1,0 +1,11 @@
+@import '../../styles/variables';
+
+.row {
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacing-unit;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

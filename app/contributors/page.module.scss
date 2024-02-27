@@ -6,4 +6,8 @@
 
     margin-bottom: $spacing-unit-l;
   }
+
+  .contributorsListSection {
+    @include limit-max-inner-width($limit: $grid-max-width-l);
+  }
 }

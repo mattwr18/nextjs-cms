@@ -1,6 +1,8 @@
+import { fetchContributors } from '../lib/data';
 import PageHeader from '../ui/PageHeader';
 import CopyButton from '../ui/CopyButton';
-import styles from '../page.module.scss';
+import ContributorsList from '../ui/ContributorsList';
+import styles from './page.module.scss';
 
 const tabBarItems = () => {
   return [
@@ -11,7 +13,9 @@ const tabBarItems = () => {
   ];
 };
 
-export default function Page() {
+export default async function Page() {
+  const contributors = await fetchContributors();
+
   return (
     <main className={styles.main}>
       <PageHeader tabBarItems={tabBarItems()}>
@@ -21,6 +25,9 @@ export default function Page() {
         </div>
         <CopyButton text='Einladung kopieren' />
       </PageHeader>
+      <section className={styles.contributorsListSection}>
+        <ContributorsList contributors={contributors} />
+      </section>
     </main>
   );
 }

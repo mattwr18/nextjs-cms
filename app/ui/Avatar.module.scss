@@ -1,0 +1,18 @@
+@import '../../styles/variables';
+
+.avatar {
+  position: relative;
+  overflow: hidden;
+  width: $spacing-unit-xl;
+  height: $spacing-unit-xl;
+  border-radius: 50%;
+  margin-right: $spacing-unit-s;
+
+  text {
+    font-size: 40px;
+    font-weight: 600;
+    text-anchor: middle;
+    dominant-baseline: central;
+    fill: #fff;
+  }
+}
