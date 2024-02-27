@@ -23,25 +23,21 @@ const users = [
   },
 ];
 
-const contributors = [
-  [...Array(20)].map((_, i) => {
-    return {
-      id: uuidv4(),
-      first_name: `${i}th`,
-      last_name: 'contributor',
-    };
-  }),
-];
+const contributors = [...Array(20)].map((_, i) => {
+  return {
+    id: uuidv4(),
+    first_name: `${i}th`,
+    last_name: 'contributor',
+  };
+});
 
-const requests = [
-  [...Array(20)].map((_, i) => {
-    return {
-      id: uuidv4(),
-      title: `Request ${i + 1}`,
-      text: lorem.generateSentences(i),
-    };
-  }),
-];
+const requests = [...Array(20)].map((_, i) => {
+  return {
+    id: uuidv4(),
+    title: `Request ${i + 1}`,
+    text: lorem.generateSentences(i),
+  };
+});
 
 module.exports = {
   users,
