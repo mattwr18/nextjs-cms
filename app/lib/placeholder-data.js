@@ -1,23 +1,11 @@
-const { v4: uuidv4 } = require('uuid');
-const LoremIpsum = require('lorem-ipsum').LoremIpsum;
-
-const lorem = new LoremIpsum({
-  sentencesPerParagraph: {
-    max: 8,
-    min: 4,
-  },
-  wordsPerSentence: {
-    max: 16,
-    min: 4,
-  },
-});
+const { faker } = require('@faker-js/faker');
 
 const users = [
   {
-    id: uuidv4(),
-    first_name: 'User',
-    last_name: 'First',
-    email: 'user@nextmail.com',
+    id: faker.string.uuid(),
+    first_name: faker.person.firstName(),
+    last_name: faker.person.lastName(),
+    email: faker.internet.email(),
     password: '123456',
     admin: true,
   },
@@ -25,17 +13,17 @@ const users = [
 
 const contributors = [...Array(20)].map((_, i) => {
   return {
-    id: uuidv4(),
-    first_name: `${i}th`,
-    last_name: 'contributor',
+    id: faker.string.uuid(),
+    first_name: faker.person.firstName(),
+    last_name: faker.person.lastName(),
   };
 });
 
 const requests = [...Array(20)].map((_, i) => {
   return {
-    id: uuidv4(),
-    title: `Request ${i + 1}`,
-    text: lorem.generateSentences(i),
+    id: faker.string.uuid(),
+    title: faker.word.words({ count: { min: 1, max: 4 } }),
+    text: faker.lorem.sentences({ min: i, max: 20 }),
   };
 });
 
