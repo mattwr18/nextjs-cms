@@ -30,6 +30,13 @@ export default function PageHeader({
     [searchParams],
   );
 
+  const tabBarListItemClass = (searchParam?: { name: string; value: string }) => {
+    if (!searchParam) return styles.tabBarListItem;
+    if (searchParams.get(searchParam.name) == searchParam.value) {
+      return `${styles.activeTabBarListItem}`;
+    }
+    return styles.tabBarListItem;
+  };
   return (
     <header className={`${styles.pageHeader} ${className ? className : ''}`}>
       {tabBarItems ? (
@@ -39,7 +46,7 @@ export default function PageHeader({
             <nav>
               <ul className={styles.tabBarList}>
                 {tabBarItems.map(({ name, count, searchParam }) => (
-                  <li key={name} className={styles.tabBarListItem}>
+                  <li key={name} className={tabBarListItemClass(searchParam)}>
                     {searchParam ? (
                       <Link
                         className={styles.tabBarButtons}

@@ -6,7 +6,6 @@
   background-color: $color-gray-light;
   margin-bottom: $spacing-unit;
   padding-top: $spacing-unit-l;
-  padding-bottom: $spacing-unit-l;
 
   .flexBox {
     display: flex;
@@ -22,7 +21,8 @@
     margin-top: $spacing-unit-s;
   }
 
-  .tabBarListItem {
+  .tabBarListItem,
+  .activeTabBarListItem {
     display: inline-block;
     padding: $spacing-unit-xs 0;
     border-bottom: 2px solid transparent;
@@ -31,11 +31,17 @@
     transition: 0.1s all ease-out;
   }
 
-  .tabBarListItem:not(:last-child) {
+  .activeTabBarListItem {
+    border-bottom-color: $color-blue;
+    color: $color-text;
+  }
+
+  .tabBarListItem:not(:last-child),
+  .activeTabBarListItem {
     margin-right: $spacing-unit;
   }
 
-  .tabBarListItem:not(.TabBar-item--active):hover {
+  .tabBarListItem:not(.activeTabBarListItem):hover {
     border-bottom-color: $color-gray;
     color: $color-text;
   }
@@ -44,7 +50,9 @@
     @include button-styles($modifier: inline);
   }
 
-  .tabBarListItem:nth-child(n + 4):last-child {
-    margin-left: calc(#{$spacing-unit-xl} * 1.5);
+  .tabBarListItem {
+    button {
+      margin-left: calc(#{$spacing-unit-xl} * 1.5);
+    }
   }
 }
