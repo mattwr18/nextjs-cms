@@ -1,3 +1,7 @@
+'use client';
+import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useCallback } from 'react';
 import styles from './PageHeader.module.scss';
 
 export default function PageHeader({
@@ -7,8 +11,25 @@ export default function PageHeader({
 }: {
   children: React.ReactNode;
   className?: string;
-  tabBarItems?: Array<{ name: string }>;
+  tabBarItems?: Array<{
+    name: string;
+    count?: number;
+    searchParam?: { name: string; value: string };
+  }>;
 }) {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams],
+  );
+
   return (
     <header className={`${styles.pageHeader} ${className ? className : ''}`}>
       {tabBarItems ? (
@@ -17,9 +38,18 @@ export default function PageHeader({
           <div>
             <nav>
               <ul className={styles.tabBarList}>
-                {tabBarItems.map(({ name }) => (
+                {tabBarItems.map(({ name, count, searchParam }) => (
                   <li key={name} className={styles.tabBarListItem}>
-                    <button className={styles.tabBarButtons}>{name}</button>
+                    {searchParam ? (
+                      <Link
+                        className={styles.tabBarButtons}
+                        href={`${pathname}?${createQueryString(searchParam.name, searchParam.value)}`}
+                      >
+                        {name}
+                      </Link>
+                    ) : (
+                      <button className={styles.tabBarButtons}>{name}</button>
+                    )}
                   </li>
                 ))}
               </ul>

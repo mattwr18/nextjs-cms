@@ -4,21 +4,29 @@ import CopyButton from '../ui/CopyButton';
 import ContributorsList from '../ui/ContributorsList';
 import styles from './page.module.scss';
 
-const tabBarItems = () => {
-  return [
-    { name: 'Aktiv' },
-    { name: 'Inaktiv' },
-    { name: 'Abbestellt' },
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: {
+    state?: string;
+  };
+}) {
+  const query = searchParams?.state || '';
+  const contributors = await fetchContributors(query);
+
+  const tabBarItems = [
+    { name: 'Aktiv', searchParam: { name: 'state', value: 'active' } },
+    { name: 'Inaktiv', searchParam: { name: 'state', value: 'inactive' } },
+    {
+      name: 'Abbestellt',
+      searchParam: { name: 'state', value: 'unsubscribed' },
+    },
     { name: 'filtern' },
   ];
-};
-
-export default async function Page() {
-  const contributors = await fetchContributors();
 
   return (
     <main className={styles.main}>
-      <PageHeader tabBarItems={tabBarItems()}>
+      <PageHeader tabBarItems={tabBarItems}>
         <div>
           <h1>Mitglieder</h1>
           <p>Das sind die Mitglieder deiner Community</p>
