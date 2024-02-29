@@ -1,4 +1,9 @@
-import { fetchContributors } from '../lib/data';
+import {
+  fetchContributors,
+  fetchActiveContributorsCount,
+  fetchInactiveContributorsCount,
+  fetchUnsubscribedContributorsCount,
+} from '../lib/data';
 import PageHeader from '../ui/PageHeader';
 import CopyButton from '../ui/CopyButton';
 import ContributorsList from '../ui/ContributorsList';
@@ -12,13 +17,31 @@ export default async function Page({
   };
 }) {
   const query = searchParams?.state || '';
+  const [
+    activeContributorsCount,
+    inactiveContributorsCount,
+    unsubscribedContributorsCount,
+  ] = await Promise.all([
+    fetchActiveContributorsCount(),
+    fetchInactiveContributorsCount(),
+    fetchUnsubscribedContributorsCount(),
+  ]);
   const contributors = await fetchContributors(query);
-
+  console.log('activeContributorsCount', activeContributorsCount);
   const tabBarItems = [
-    { name: 'Aktiv', searchParam: { name: 'state', value: 'active' } },
-    { name: 'Inaktiv', searchParam: { name: 'state', value: 'inactive' } },
+    {
+      name: 'Aktiv',
+      count: activeContributorsCount,
+      searchParam: { name: 'state', value: 'active' },
+    },
+    {
+      name: 'Inaktiv',
+      count: inactiveContributorsCount,
+      searchParam: { name: 'state', value: 'inactive' },
+    },
     {
       name: 'Abbestellt',
+      count: unsubscribedContributorsCount,
       searchParam: { name: 'state', value: 'unsubscribed' },
     },
     { name: 'filtern' },

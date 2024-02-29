@@ -55,4 +55,14 @@
       margin-left: calc(#{$spacing-unit-xl} * 1.5);
     }
   }
+
+  .count {
+    display: inline-block;
+    margin-left: $spacing-unit-xs;
+    padding: 0 0.75em;
+    background-color: $color-gray;
+    color: #fff;
+    font-size: $font-size-xs;
+    border-radius: $border-radius-full;
+  }
 }

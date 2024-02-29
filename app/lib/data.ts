@@ -26,6 +26,39 @@ export async function fetchContributors(state?: string) {
   }
 }
 
+export async function fetchActiveContributorsCount() {
+  try {
+    const { rows } =
+      await sql`SELECT COUNT(*) FROM contributors WHERE deactivated_at IS NULL AND unsubscribed_at IS NULL`;
+    return rows[0].count;
+  } catch (error) {
+    console.log('Database error:', error);
+    throw new Error('Falied to fetch active contributors count');
+  }
+}
+
+export async function fetchInactiveContributorsCount() {
+  try {
+    const { rows } =
+      await sql`SELECT COUNT(*) FROM contributors WHERE deactivated_at IS NOT NULL`;
+    return rows[0].count;
+  } catch (error) {
+    console.log('Database error:', error);
+    throw new Error('Falied to fetch inactive contributors count');
+  }
+}
+
+export async function fetchUnsubscribedContributorsCount() {
+  try {
+    const { rows } =
+      await sql`SELECT COUNT(*) FROM contributors WHERE unsubscribed_at IS NOT NULL`;
+    return rows[0].count;
+  } catch (error) {
+    console.log('Database error:', error);
+    throw new Error('Falied to fetch active contributors count');
+  }
+}
+
 export async function fetchRequests() {
   noStore();
 
