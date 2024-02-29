@@ -17,11 +17,9 @@ export default function PageHeader({
           <div>
             <nav>
               <ul className={styles.tabBarList}>
-                {tabBarItems.map((item) => (
-                  <li className={styles.tabBarListItem}>
-                    <button className={styles.tabBarButtons}>
-                      {item.name}
-                    </button>
+                {tabBarItems.map(({ name }) => (
+                  <li key={name} className={styles.tabBarListItem}>
+                    <button className={styles.tabBarButtons}>{name}</button>
                   </li>
                 ))}
               </ul>
