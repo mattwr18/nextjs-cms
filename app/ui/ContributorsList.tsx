@@ -1,10 +1,12 @@
 import ContributorRow from './ContributorRow';
+import { Contributor } from '../lib/definitions';
+
 import styles from './ContributorsList.module.scss';
 
 export default function ContributorsList({
   contributors,
 }: {
-  contributors: Array<{ id: string; first_name: string; last_name: string }>;
+  contributors: Array<Contributor>;
 }) {
   return (
     <ul className={styles.list}>

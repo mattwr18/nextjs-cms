@@ -1,23 +1,27 @@
 import Link from 'next/link';
 import Avatar from './Avatar';
-import { fullName } from '../lib/utils';
+import { fullName, contributorChannels } from '../lib/utils';
+import { Contributor } from '../lib/definitions';
 import styles from './ContributorRow.module.scss';
 
 export default function ContributorRow({
   contributor,
 }: {
-  contributor: { id: string; first_name: string; last_name: string };
+  contributor: Contributor;
 }) {
   return (
     <Link href={`/contributors/${contributor.id}`} className={styles.row}>
       <Avatar record={contributor} />
       <div>
-        <strong>
+        <strong className={styles.name}>
           {fullName({
             firstName: contributor.first_name,
             lastName: contributor.last_name,
           })}
         </strong>
+        <span className={styles.channel}>
+          via {contributorChannels(contributor)}
+        </span>
       </div>
     </Link>
   );
