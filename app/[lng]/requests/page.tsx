@@ -49,7 +49,7 @@ export default async function Page({
           <h1>{t('main-heading')}</h1>
           <p>{t('header-explanation')}</p>
         </div>
-        <Link href={`${lng}/requests/new`} className={styles.newRequestLink}>
+        <Link href={`/${lng}/requests/new`} className={styles.newRequestLink}>
           {t('new-request-button-text')}
         </Link>
       </PageHeader>
