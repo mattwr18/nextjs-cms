@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { useTranslation } from '@/app/i18n';
-import styles from './MainHeader.module.scss';
+import styles from './NavBar.module.scss';
 
-export default async function MainHeader({ lng }: { lng: string }) {
+export default async function NavBar({ lng }: { lng: string }) {
   const { t } = await useTranslation(lng);
   const navLinks = [
     { name: t('nav-bar-links.dashboard'), href: `/${lng}` },
