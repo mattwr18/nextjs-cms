@@ -1,8 +1,7 @@
 @import '../../styles/variables';
 
 .main {
-  height: 100vh;
-  background-color: $color-gray-lightest;
+  background-color: $color-bg;
 
   header:first-child {
     @include limit-max-inner-width($limit: $grid-max-width-l);
@@ -12,5 +11,9 @@
 
   .newRequestLink {
     @include button-styles;
+  }
+
+  .requestsListSection {
+    @include limit-max-inner-width($limit: $grid-max-width-l);
   }
 }

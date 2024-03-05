@@ -1,0 +1,9 @@
+@import '../../styles/variables';
+
+.row {
+  .textWrapper {
+    margin-bottom: $spacing-unit;
+    margin-top: $spacing-unit-xs;
+    word-break: break-word;
+  }
+}

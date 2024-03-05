@@ -136,7 +136,7 @@ async function seedRequests(client) {
           updated_at TIMESTAMP DEFAULT NOW(),
           user_id UUID,
           schedule_send_for TIMESTAMP,
-          broacasted_at TIMESTAMP
+          broadcasted_at TIMESTAMP
         );
       `;
 
@@ -146,8 +146,10 @@ async function seedRequests(client) {
     const insertedRequests = await Promise.all(
       requests.map(async (request) => {
         return client.sql`
-          INSERT INTO requests (id, title, text)
-          VALUES (${request.id}, ${request.title}, ${request.text})
+          INSERT INTO requests (id, title, text,
+                                user_id, schedule_send_for, broadcasted_at)
+          VALUES (${request.id}, ${request.title}, ${request.text},
+                  ${request.user_id}, ${request.schedule_send_for}, ${request.broadcasted_at})
           ON CONFLICT (id) DO NOTHING;
         `;
       }),

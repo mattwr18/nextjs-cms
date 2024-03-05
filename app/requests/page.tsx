@@ -1,15 +1,44 @@
 import Link from 'next/link';
+import {
+  fetchRequests,
+  fetchSentRequestsCount,
+  fetchPlannedRequestsCount,
+} from '../lib/data';
 import PageHeader from '../ui/PageHeader';
+import RequestsList from '../ui/RequestsList';
 import styles from './page.module.scss';
 
-const tabBarItems = () => {
-  return [{ name: 'Gestellt' }, { name: 'Geplant' }];
-};
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: {
+    filter?: string;
+  };
+}) {
+  const query = searchParams?.filter || '';
 
-export default function Page() {
+  const [sentRequestsCount, plannedRequestsCount] = await Promise.all([
+    fetchSentRequestsCount(),
+    fetchPlannedRequestsCount(),
+  ]);
+  const tabBarItems = [
+    {
+      name: 'Gestellt',
+      count: sentRequestsCount,
+      searchParam: { name: 'filter', value: 'sent' },
+    },
+    {
+      name: 'Geplant',
+      count: plannedRequestsCount,
+      searchParam: { name: 'filter', value: 'planned' },
+    },
+  ];
+
+  const requests = await fetchRequests(query);
+
   return (
     <main className={styles.main}>
-      <PageHeader tabBarItems={tabBarItems()}>
+      <PageHeader tabBarItems={tabBarItems}>
         <div>
           <h1>Fragen</h1>
           <p>Die besten Fragen an deine Community</p>
@@ -18,6 +47,9 @@ export default function Page() {
           Neue Frage stellen
         </Link>
       </PageHeader>
+      <section className={styles.requestsListSection}>
+        <RequestsList requests={requests} />
+      </section>
     </main>
   );
 }

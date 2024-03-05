@@ -59,16 +59,47 @@ export async function fetchUnsubscribedContributorsCount() {
   }
 }
 
-export async function fetchRequests() {
+export async function fetchRequests(filter?: string) {
   noStore();
 
   try {
     console.log('Fetching requests...');
-    const { rows } = await sql<Request>`SELECT * FROM requests`;
+    let query = `SELECT * FROM requests WHERE broadcasted_at IS NOT NULL`;
+
+    if (filter == 'planned') {
+      query = `SELECT * FROM requests WHERE schedule_send_for IS NOT NULL AND (schedule_send_for > NOW())`;
+    }
+    const { rows } = await sql.query(query);
+    console.log(`Fetched ${rows.length} requests`);
     return rows;
   } catch (error) {
     console.error('Database error:', error);
     throw new Error('Falied to fetch requests');
+  }
+}
+
+export async function fetchSentRequestsCount() {
+  try {
+    const { rows } =
+      await sql`SELECT COUNT(*) FROM requests WHERE broadcasted_at IS NOT NULL`;
+    console.log(`Fetched ${rows[0].count} sent requests`);
+    return rows[0].count;
+  } catch (error) {
+    console.error('Database error:', error);
+    throw new Error('Falied to fetch sent requests count');
+  }
+}
+
+export async function fetchPlannedRequestsCount() {
+  try {
+    const { rows } =
+      await sql`SELECT COUNT(*) FROM requests WHERE schedule_send_for IS NOT NULL AND (schedule_send_for > NOW())`;
+    console.log(`Fetched ${rows[0].count} planned requests`);
+
+    return rows[0].count;
+  } catch (error) {
+    console.error('Database error:', error);
+    throw new Error('Falied to fetch planned requests count');
   }
 }
 
@@ -92,5 +123,18 @@ export async function fetchContributorById(id: string) {
   } catch (error) {
     console.error('Database error:', error);
     throw new Error('Falied to fetch contributor.');
+  }
+}
+
+export async function fetchRequestById(id: string) {
+  noStore();
+
+  try {
+    const { rows } =
+      await sql<Request>`SELECT * FROM requests WHERE requests.id = ${id}`;
+    return rows[0];
+  } catch (error) {
+    console.error('Database error:', error);
+    throw new Error('Falied to fetch request.');
   }
 }
