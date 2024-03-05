@@ -1,0 +1,11 @@
+{
+  "main-heading": "Mitglieder",
+  "header-explanation": "Das sind die Mitglieder deiner Community",
+  "copy-button-text": "Einladung kopieren",
+  "tab-bar-items": {
+    "active": "Aktiv",
+    "inactive": "Inaktiv",
+    "unsubscribed": "Abbestellt",
+    "filter": "filtern"
+  }
+}

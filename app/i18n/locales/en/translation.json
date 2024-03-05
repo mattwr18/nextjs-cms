@@ -1,0 +1,9 @@
+{
+  "main-heading": "Good morning, {{firstName}}",
+  "to-new-request-page": "Send new question",
+  "nav-bar-links": {
+    "dashboard": "Dashboard",
+    "contributors": "Contributors",
+    "dialogue": "Dialogue"
+  }
+}

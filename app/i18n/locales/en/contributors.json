@@ -1,0 +1,11 @@
+{
+  "main-heading": "Contributors",
+  "header-explanation": "These are the contributors to your community",
+  "copy-button-text": "Copy invite link",
+  "tab-bar-items": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "unsubscribed": "Unsubscribed",
+    "filter": "filter"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "main-heading": "Fragen",
+  "header-explanation": "Die besten Fragen an deine Community",
+  "tab-bar-items": {
+    "sent": "Gestellt",
+    "planned": "Geplant"
+  },
+  "new-request-button-text": "Neue Fragen stellen"
+}

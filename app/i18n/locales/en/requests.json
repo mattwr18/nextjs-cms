@@ -1,0 +1,9 @@
+{
+  "main-heading": "Questions",
+  "header-explanation": "The best questions to ask your community",
+  "tab-bar-items": {
+    "sent": "Sent",
+    "planned": "Planned"
+  },
+  "new-request-button-text": "Send new question"
+}

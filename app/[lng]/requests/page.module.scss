@@ -1,0 +1,20 @@
+@import '@/styles/variables';
+
+.main {
+  background-color: $color-bg;
+
+  header:first-child {
+    @include limit-max-inner-width($limit: $grid-max-width-l);
+
+    margin-bottom: $spacing-unit-l;
+    padding-bottom: 0;
+  }
+
+  .newRequestLink {
+    @include button-styles;
+  }
+
+  .requestsListSection {
+    @include limit-max-inner-width($limit: $grid-max-width-l);
+  }
+}

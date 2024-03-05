@@ -1,0 +1,5 @@
+{
+  "channel": "with {{channel}}",
+  "contributor-since-date": "Contributor since {{date}}",
+  "edit-main-info": "Edit main info"
+}

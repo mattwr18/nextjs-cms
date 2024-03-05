@@ -1,0 +1,9 @@
+{
+  "main-heading": "Guten Morgen, {{firstName}}",
+  "new-request-button-text": "Neue Frage stellen",
+  "nav-bar-links": {
+    "dashboard": "Dashboard",
+    "contributors": "Contributors",
+    "dialogue": "Dilaog"
+  }
+}

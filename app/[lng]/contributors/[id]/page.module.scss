@@ -1,0 +1,26 @@
+@import '@/styles/variables';
+
+.main {
+  @include limit-max-inner-width($limit: $grid-max-width-l);
+
+  .pageHeader {
+    display: flex;
+    margin: $spacing-unit-l 0 $spacing-unit;
+  }
+
+  svg {
+    height: calc(#{$spacing-unit-xl} * 1.5);
+    width: calc(#{$spacing-unit-xl} * 1.5);
+  }
+
+  .mainHeader {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .headerLink {
+    text-decoration: underline;
+    color: $color-text-light;
+  }
+}

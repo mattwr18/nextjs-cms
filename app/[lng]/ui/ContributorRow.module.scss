@@ -1,0 +1,17 @@
+@import '@/styles/variables';
+
+.row {
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacing-unit;
+
+  &:hover .name {
+    text-decoration: underline;
+  }
+
+  .channel {
+    margin-left: 0.25rem;
+    color: $color-gray;
+    font-size: $font-size-s;
+  }
+}
