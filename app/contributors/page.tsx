@@ -27,7 +27,6 @@ export default async function Page({
     fetchUnsubscribedContributorsCount(),
   ]);
   const contributors = await fetchContributors(query);
-  console.log('activeContributorsCount', activeContributorsCount);
   const tabBarItems = [
     {
       name: 'Aktiv',

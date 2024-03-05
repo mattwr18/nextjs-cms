@@ -43,7 +43,7 @@ export default async function Page({
           <h1>Fragen</h1>
           <p>Die besten Fragen an deine Community</p>
         </div>
-        <Link href='/' className={styles.newRequestLink}>
+        <Link href='/requests/new' className={styles.newRequestLink}>
           Neue Frage stellen
         </Link>
       </PageHeader>

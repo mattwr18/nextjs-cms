@@ -15,7 +15,6 @@ export default function RequestRow({ request }: { request: Request }) {
       minute: 'numeric',
       hour12: false,
     };
-    console.log('request', request.broadcasted_at);
     if (request.broadcasted_at) {
       text = `Frage gestellt ${request.broadcasted_at.toLocaleDateString('de', localeOptions)} Uhr`;
     } else {

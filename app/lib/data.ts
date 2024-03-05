@@ -16,9 +16,7 @@ export async function fetchContributors(state?: string) {
       query = `SELECT * FROM contributors WHERE unsubscribed_at IS NOT NULL`;
     }
 
-    console.log('Fetching contributors...');
     const { rows } = await sql.query(query);
-    console.log(`Fetched ${rows.length} contributors`);
     return rows;
   } catch (error) {
     console.error('Database error:', error);
@@ -32,7 +30,7 @@ export async function fetchActiveContributorsCount() {
       await sql`SELECT COUNT(*) FROM contributors WHERE deactivated_at IS NULL AND unsubscribed_at IS NULL`;
     return rows[0].count;
   } catch (error) {
-    console.log('Database error:', error);
+    console.error('Database error:', error);
     throw new Error('Falied to fetch active contributors count');
   }
 }
@@ -43,7 +41,7 @@ export async function fetchInactiveContributorsCount() {
       await sql`SELECT COUNT(*) FROM contributors WHERE deactivated_at IS NOT NULL`;
     return rows[0].count;
   } catch (error) {
-    console.log('Database error:', error);
+    console.error('Database error:', error);
     throw new Error('Falied to fetch inactive contributors count');
   }
 }
@@ -54,7 +52,7 @@ export async function fetchUnsubscribedContributorsCount() {
       await sql`SELECT COUNT(*) FROM contributors WHERE unsubscribed_at IS NOT NULL`;
     return rows[0].count;
   } catch (error) {
-    console.log('Database error:', error);
+    console.error('Database error:', error);
     throw new Error('Falied to fetch active contributors count');
   }
 }
@@ -63,14 +61,12 @@ export async function fetchRequests(filter?: string) {
   noStore();
 
   try {
-    console.log('Fetching requests...');
     let query = `SELECT * FROM requests WHERE broadcasted_at IS NOT NULL`;
 
     if (filter == 'planned') {
       query = `SELECT * FROM requests WHERE schedule_send_for IS NOT NULL AND (schedule_send_for > NOW())`;
     }
     const { rows } = await sql.query(query);
-    console.log(`Fetched ${rows.length} requests`);
     return rows;
   } catch (error) {
     console.error('Database error:', error);
@@ -82,7 +78,6 @@ export async function fetchSentRequestsCount() {
   try {
     const { rows } =
       await sql`SELECT COUNT(*) FROM requests WHERE broadcasted_at IS NOT NULL`;
-    console.log(`Fetched ${rows[0].count} sent requests`);
     return rows[0].count;
   } catch (error) {
     console.error('Database error:', error);
@@ -94,7 +89,6 @@ export async function fetchPlannedRequestsCount() {
   try {
     const { rows } =
       await sql`SELECT COUNT(*) FROM requests WHERE schedule_send_for IS NOT NULL AND (schedule_send_for > NOW())`;
-    console.log(`Fetched ${rows[0].count} planned requests`);
 
     return rows[0].count;
   } catch (error) {

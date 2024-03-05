@@ -7,7 +7,7 @@ export default function Page() {
     <main className={styles.main}>
       <PageHeader className={styles.pageHeader}>
         <h1>Guten Morgen, Matthew</h1>
-        <Link href='/' className={styles.newRequestLink}>
+        <Link href='/requests/new' className={styles.newRequestLink}>
           Neue Frage stellen
         </Link>
       </PageHeader>
