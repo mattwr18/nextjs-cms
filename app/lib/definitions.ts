@@ -4,7 +4,7 @@ export type User = {
   last_name: string;
   email: string;
   password: string;
-  admin: boolean;
+  role: string;
   created_at: Date;
   updated_at: Date;
 };
@@ -63,3 +63,13 @@ export interface ChannelsObject {
 export interface useTranslationOptions {
   keyPrefix?: string;
 }
+
+export const Role: {
+  USER: 'USER';
+  ADMIN: 'ADMIN';
+} = {
+  USER: 'USER',
+  ADMIN: 'ADMIN',
+};
+
+export type Role = (typeof Role)[keyof typeof Role];

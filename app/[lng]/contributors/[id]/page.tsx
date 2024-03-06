@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useTranslation } from '@/app/i18n';
-import { fetchContributorById } from '@/app/[lng]/lib/data';
-import { fullName } from '@/app/[lng]/lib/utils';
+import { fetchContributorById } from '@/app/lib/data';
+import { fullName } from '@/app/lib/utils';
 import Avatar from '@/app/[lng]/ui/Avatar';
 import styles from './page.module.scss';
 

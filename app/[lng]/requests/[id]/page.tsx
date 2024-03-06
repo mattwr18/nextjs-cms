@@ -1,4 +1,4 @@
-import { fetchRequestById } from '@/app/[lng]/lib/data';
+import { fetchRequestById } from '@/app/lib/data';
 
 export default async function Page({
   params: { id },

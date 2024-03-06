@@ -8,7 +8,7 @@ export default async function RequestForm({ lng }: { lng: string }) {
     keyPrefix: 'new-request.form',
   });
   const initialState = { message: null, errors: {} };
-  
+
   return (
     <section className={styles.requestFormSection}>
       <form>
@@ -43,9 +43,7 @@ export default async function RequestForm({ lng }: { lng: string }) {
           className={styles.input}
           defaultValue={convertToDateTimeLocalString(new Date())}
         />
-        <button className={styles.button}>
-          {t('submit-button')}
-        </button>
+        <button className={styles.button}>{t('submit-button')}</button>
       </form>
     </section>
   );

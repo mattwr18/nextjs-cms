@@ -8,10 +8,10 @@
     "build:local": "prettier --write . && stylelint --allow-empty-input \"**/*.{css,scss}\" && next build",
     "start": "next start",
     "lint": "prettier --check . && stylelint --allow-empty-input \"**/*.{css,scss}\" && next lint",
-    "format": "prettier --write .",
-    "seed": "node -r dotenv/config ./scripts/seed.js"
+    "format": "prettier --write ."
   },
   "dependencies": {
+    "@prisma/client": "^5.10.2",
     "@vercel/postgres": "^0.7.2",
     "accept-language": "^3.0.18",
     "bcrypt": "^5.1.1",
@@ -35,10 +35,15 @@
     "eslint-config-next": "14.1.0",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.2.5",
+    "prisma": "^5.10.2",
     "sass": "^1.71.1",
     "stylelint": "^16.2.1",
     "stylelint-config-prettier-scss": "^1.0.0",
     "stylelint-config-standard-scss": "^13.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   }
 }

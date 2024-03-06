@@ -1,3 +1,4 @@
+const { Role } = require('./definitions');
 const { faker } = require('@faker-js/faker');
 
 const organizationId = faker.string.uuid();
@@ -9,7 +10,54 @@ const users = [
     last_name: faker.person.lastName(),
     email: faker.internet.email(),
     password: '123456',
-    admin: true,
+    tags: {
+      create: [
+        {
+          id: faker.string.uuid(),
+          name: 'Doctor',
+        },
+        {
+          id: faker.string.uuid(),
+          name: 'Parent',
+        },
+      ],
+    },
+  },
+  {
+    id: faker.string.uuid(),
+    first_name: faker.person.firstName(),
+    last_name: faker.person.lastName(),
+    email: faker.internet.email(),
+    password: '123456',
+    role: Role.ADMIN,
+    tags: {
+      create: [
+        {
+          id: faker.string.uuid(),
+          name: 'Student',
+        },
+        {
+          id: faker.string.uuid(),
+          name: 'Team',
+        },
+      ],
+    },
+  },
+  {
+    id: faker.string.uuid(),
+    first_name: faker.person.firstName(),
+    last_name: faker.person.lastName(),
+    email: faker.internet.email(),
+    password: '123456',
+    role: Role.ADMIN,
+    tags: {
+      create: [
+        {
+          id: faker.string.uuid(),
+          name: 'Teacher',
+        },
+      ],
+    },
   },
 ];
 
@@ -29,7 +77,7 @@ let contributors = [...Array(4)].map((_, i) => {
     deactivated_at: i < 2 ? faker.date.recent() : null,
     threema_id: null,
     data_processing_consented_at: new Date(),
-    telgram_onboarding_token: null,
+    telegram_onboarding_token: null,
     signal_phone_number: null,
     signal_onboarding_completed_at: null,
     additional_email: i > 2 ? faker.internet.email() : null,
@@ -61,7 +109,7 @@ contributors = [
       deactivated_at: i < 2 ? faker.date.recent() : null,
       threema_id: null,
       data_processing_consented_at: new Date(),
-      telgram_onboarding_token: null,
+      telegram_onboarding_token: null,
       signal_phone_number: null,
       signal_onboarding_completed_at: null,
       additional_email: i > 2 ? faker.internet.email() : null,
@@ -94,7 +142,7 @@ contributors = [
       deactivated_at: i < 2 ? faker.date.recent() : null,
       threema_id: null,
       data_processing_consented_at: new Date(),
-      telgram_onboarding_token: null,
+      telegram_onboarding_token: null,
       signal_phone_number: faker.phone.number(),
       signal_onboarding_completed_at: new Date(),
       additional_email: i > 12 ? faker.internet.email() : null,
@@ -127,7 +175,7 @@ contributors = [
       deactivated_at: i < 2 ? faker.date.recent() : null,
       threema_id: null,
       data_processing_consented_at: new Date(),
-      telgram_onboarding_token: null,
+      telegram_onboarding_token: null,
       signal_phone_number: null,
       signal_onboarding_completed_at: null,
       additional_email: i > 22 ? faker.internet.email() : null,
@@ -148,7 +196,7 @@ const requests = [...Array(20)].map((_, i) => {
     title: faker.word.words({ count: { min: 1, max: 4 } }),
     text: faker.lorem.sentences({ min: i, max: 20 }),
     user_id: users[0].id,
-    schedule_send_for: i % 3 == 0 ? faker.date.future() : null,
+    schedule_send_for: i % 3 == 0 ? faker.date.future() : faker.date.recent(),
     broadcasted_at: i % 3 != 0 ? faker.date.recent() : null,
   };
 });
