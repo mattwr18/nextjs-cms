@@ -3,6 +3,22 @@
   "request-planned-for": "Frage geplant für {{date}} Uhr",
   "new-request": {
     "main-heading": "Neue Frage stellen",
-    "header-explanation": "Finde heraus, was deine Community bewegt"
+    "header-explanation": "Finde heraus, was deine Community bewegt",
+    "form": {
+      "title": {
+        "label": "Titel",
+        "help-text": "Damit du zwischen all deinen Fragen den Überblick behältst. Der Titel wird auf manchen Kanälen zur Information an Community-Mitglieder mitgeschickt.",
+        "placeholder": "z.B. Thema der Frage"
+      },
+      "text": {
+        "label": "Was möchtest du wissen?",
+        "help-text": "Wähle eine kurze, einfache Formulierung. Beschreibe genau, welche Informationen du benötigst.",
+        "placeholder": "Gib hier deine Frage ein..."
+      },
+      "schedule-send-for": {
+        "label": "Versand planen. Deine Frage wird automatisch zur eingestellten Zeit verschickt."
+      },
+      "submit-button": "Frage an die Community senden"
+    }
   }
 }

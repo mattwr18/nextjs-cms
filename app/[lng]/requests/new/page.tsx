@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { useTranslation } from '@/app/i18n';
 import PageHeader from '@/app/[lng]/ui/PageHeader';
+import RequestForm from '@/app/[lng]/ui/RequestForm';
 
 export default async function Page({
   params: { lng },
@@ -16,6 +17,7 @@ export default async function Page({
           <p>{t('new-request.header-explanation')}</p>
         </PageHeader>
       </Suspense>
+      <RequestForm lng={lng} />
     </main>
   );
 }

@@ -1,4 +1,4 @@
-import { Request } from '@/app/[lng]/lib/definitions';
+import { Request } from '@/app/lib/definitions';
 import RequestRow from './RequestRow';
 import styles from './RequestsList.module.scss';
 

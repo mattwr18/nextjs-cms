@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { useTranslation } from '@/app/i18n';
-import { fullName, contributorChannels } from '@/app/[lng]/lib/utils';
+import { fullName, contributorChannels } from '@/app/lib/utils';
 import Avatar from './Avatar';
-import { Contributor } from '@/app/[lng]/lib/definitions';
+import { Contributor } from '@/app/lib/definitions';
 import styles from './ContributorRow.module.scss';
 
 export default async function ContributorRow({

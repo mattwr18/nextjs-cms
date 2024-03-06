@@ -26,6 +26,7 @@ $input-focus-shadow: 0 0 0 3px $color-blue-lightest;
 $border-radius: 5px;
 $border-radius-full: 9999px;
 $input-padding: $spacing-unit-xs $spacing-unit-s;
+$input-border-width: 1px;
 $line-height: 1.6em;
 $color-text: #333;
 $color-text-light: #656565;
@@ -70,6 +71,37 @@ $font-family:
   &:hover {
     opacity: 0.8;
   }
+
+  &:focus {
+    border-color: $color-focus;
+    outline: none;
+    box-shadow: $input-focus-shadow;
+  }
+}
+
+@mixin input-styles {
+  display: block;
+  width: 100%;
+  padding: $input-padding;
+  font-size: inherit;
+  color: inherit;
+  border-radius: $border-radius;
+  border: $input-border-width solid $color-border;
+
+  &:focus {
+    border-color: $color-focus;
+    outline: none;
+    box-shadow: $input-focus-shadow;
+  }
+}
+
+@mixin textarea-styles {
+  @include input-styles;
+
+  position: relative;
+  resize: none;
+  background-color: transparent;
+  height: auto;
 
   &:focus {
     border-color: $color-focus;

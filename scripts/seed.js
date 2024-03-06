@@ -3,7 +3,7 @@ const {
   users,
   contributors,
   requests,
-} = require('@/app/[lng]/lib/placeholder-data.js');
+} = require('@/app/lib/placeholder-data.js');
 const bcrypt = require('bcrypt');
 
 async function seedUsers(client) {

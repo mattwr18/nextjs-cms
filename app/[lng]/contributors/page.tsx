@@ -4,7 +4,7 @@ import {
   fetchActiveContributorsCount,
   fetchInactiveContributorsCount,
   fetchUnsubscribedContributorsCount,
-} from '@/app/[lng]/lib/data';
+} from '@/app/lib/data';
 import PageHeader from '@/app/[lng]/ui/PageHeader';
 import CopyButton from '@/app/[lng]/ui/CopyButton';
 import ContributorsList from '@/app/[lng]/ui/ContributorsList';

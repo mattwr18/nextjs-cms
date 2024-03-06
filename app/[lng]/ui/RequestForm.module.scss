@@ -1,0 +1,33 @@
+@import '@/styles/variables';
+
+.requestFormSection {
+  @include limit-max-inner-width;
+
+  margin-top: $spacing-unit-l;
+
+  .label {
+    font-size: calc(1.2 * #{$font-size});
+    font-weight: 600;
+  }
+
+  .helpText {
+    color: $color-text-light;
+    margin-bottom: $spacing-unit-xs;
+  }
+
+  .input {
+    @include input-styles;
+
+    margin-bottom: $spacing-unit-l;
+  }
+
+  .textarea {
+    @include textarea-styles;
+    
+    margin-bottom: $spacing-unit-l;
+  }
+
+  .button {
+    @include button-styles;
+  }
+}

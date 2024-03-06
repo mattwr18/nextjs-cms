@@ -4,7 +4,7 @@ import {
   fetchRequests,
   fetchSentRequestsCount,
   fetchPlannedRequestsCount,
-} from '@/app/[lng]/lib/data';
+} from '@/app/lib/data';
 import PageHeader from '@/app/[lng]/ui/PageHeader';
 import RequestsList from '@/app/[lng]/ui/RequestsList';
 import styles from './page.module.scss';

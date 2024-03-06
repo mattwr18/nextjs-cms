@@ -1,5 +1,5 @@
 import ContributorRow from './ContributorRow';
-import { Contributor } from '@/app/[lng]/lib/definitions';
+import { Contributor } from '@/app/lib/definitions';
 
 import styles from './ContributorsList.module.scss';
 

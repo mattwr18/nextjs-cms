@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useTranslation } from '@/app/i18n';
-import { Request } from '@/app/[lng]/lib/definitions';
+import { Request } from '@/app/lib/definitions';
 import Card from './Card';
 import styles from './RequestRow.module.scss';
 
