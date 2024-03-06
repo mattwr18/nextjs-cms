@@ -37,6 +37,12 @@
     color: $color-text;
   }
 
+  .tabBarListItem {
+    button {
+      margin-left: calc(#{$spacing-unit-xl} * 1.5);
+    }
+  }
+
   .tabBarListItem:not(:last-child),
   .activeTabBarListItem {
     margin-right: $spacing-unit;
@@ -49,12 +55,6 @@
 
   .tabBarButtons {
     @include button-styles($modifier: inline);
-  }
-
-  .tabBarListItem {
-    button {
-      margin-left: calc(#{$spacing-unit-xl} * 1.5);
-    }
   }
 
   .count {

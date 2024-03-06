@@ -1,4 +1,4 @@
-import { Contributor } from './definitions';
+import { Contributor, ChannelsObject } from './definitions';
 
 export const fullName = ({
   firstName,
@@ -18,7 +18,7 @@ export const contributorChannels = (contributor: Contributor) => {
     threema_id,
     whats_app_phone_number,
   } = contributor;
-  const channelsObject = {
+  const channelsObject: ChannelsObject = {
     Email: email,
     Signal: signal_phone_number,
     Telegram: telegram_id,

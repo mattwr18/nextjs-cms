@@ -50,3 +50,16 @@ export type Request = {
   schedule_send_for: Date;
   broadcasted_at: Date;
 };
+
+export interface ChannelsObject {
+  [key: string]: string | bigint | null;
+  Email: string | null;
+  Signal: string | null;
+  Telegram: bigint | null;
+  Threema: string | null;
+  WhatsApp: string | null;
+}
+
+export interface useTranslationOptions {
+  keyPrefix?: string;
+}

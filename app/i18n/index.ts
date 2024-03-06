@@ -2,6 +2,7 @@ import { createInstance } from 'i18next';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import { initReactI18next } from 'react-i18next/initReactI18next';
 import { getOptions, defaultNS, fallbackLng } from './settings';
+import { useTranslationOptions } from '@/app/[lng]/lib/definitions';
 
 const initI18next = async (lng: string, ns: string) => {
   const i18nInstance = createInstance();
@@ -20,7 +21,7 @@ const initI18next = async (lng: string, ns: string) => {
 export async function useTranslation(
   lng: string = fallbackLng,
   ns: string = defaultNS,
-  options: object = {},
+  options: useTranslationOptions = {},
 ) {
   const i18nextInstance = await initI18next(lng, ns);
   return {

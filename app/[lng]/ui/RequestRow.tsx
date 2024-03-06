@@ -14,7 +14,7 @@ export default async function RequestRow({
   const { t } = await useTranslation(lng, 'request');
   const footerText = () => {
     let text = '';
-    const localeOptions = {
+    const localeOptions: Intl.DateTimeFormatOptions = {
       weekday: 'long',
       year: 'numeric',
       month: 'long',

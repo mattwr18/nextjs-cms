@@ -1,5 +1,6 @@
-import { useTranslation } from '@/app/i18n';
 import { Trans } from 'react-i18next/TransWithoutContext';
+import { Suspense } from 'react';
+import { useTranslation } from '@/app/i18n';
 import LanguageSwitcher from './LanguageSwitcher';
 import styles from './Footer.module.scss';
 
@@ -15,7 +16,9 @@ export default async function Footer({ lng }: { lng: string }) {
         values={{ lng }}
         components={{ bold: <strong /> }}
       />
-      <LanguageSwitcher lng={lng} />
+      <Suspense>
+        <LanguageSwitcher lng={lng} />
+      </Suspense>
     </footer>
   );
 }

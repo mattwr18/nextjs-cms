@@ -1,10 +1,21 @@
+import { Suspense } from 'react';
+import { useTranslation } from '@/app/i18n';
 import PageHeader from '@/app/[lng]/ui/PageHeader';
 
-export default function Page() {
+export default async function Page({
+  params: { lng },
+}: {
+  params: { lng: string };
+}) {
+  const { t } = await useTranslation(lng, 'request');
   return (
-    <PageHeader>
-      <h1>Neue Frage stellen</h1>
-      <p>Finde heraus, was deine Community bewegt</p>
-    </PageHeader>
+    <main>
+      <Suspense>
+        <PageHeader>
+          <h1>{t('new-request.main-heading')}</h1>
+          <p>{t('new-request.header-explanation')}</p>
+        </PageHeader>
+      </Suspense>
+    </main>
   );
 }

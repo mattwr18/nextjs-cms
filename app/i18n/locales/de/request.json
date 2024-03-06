@@ -1,4 +1,8 @@
 {
   "request-sent-at": "Frage gestellt {{date}} Uhr",
-  "request-planned-for": "Frage geplant für {{date}} Uhr"
+  "request-planned-for": "Frage geplant für {{date}} Uhr",
+  "new-request": {
+    "main-heading": "Neue Frage stellen",
+    "header-explanation": "Finde heraus, was deine Community bewegt"
+  }
 }
