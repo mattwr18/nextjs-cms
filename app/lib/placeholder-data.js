@@ -2,26 +2,37 @@ const { Role } = require('./definitions');
 const { faker } = require('@faker-js/faker');
 
 const organizationId = faker.string.uuid();
+const user0Id = faker.string.uuid();
 
+const tags = [
+  {
+    id: faker.string.uuid(),
+    name: 'Doctor',
+  },
+  {
+    id: faker.string.uuid(),
+    name: 'Parent',
+  },
+  {
+    id: faker.string.uuid(),
+    name: 'Student',
+  },
+  {
+    id: faker.string.uuid(),
+    name: 'Team',
+  },
+  {
+    id: faker.string.uuid(),
+    name: 'Teacher',
+  },
+];
 const users = [
   {
-    id: faker.string.uuid(),
+    id: user0Id,
     first_name: faker.person.firstName(),
     last_name: faker.person.lastName(),
     email: faker.internet.email(),
     password: '123456',
-    tags: {
-      create: [
-        {
-          id: faker.string.uuid(),
-          name: 'Doctor',
-        },
-        {
-          id: faker.string.uuid(),
-          name: 'Parent',
-        },
-      ],
-    },
   },
   {
     id: faker.string.uuid(),
@@ -30,18 +41,6 @@ const users = [
     email: faker.internet.email(),
     password: '123456',
     role: Role.ADMIN,
-    tags: {
-      create: [
-        {
-          id: faker.string.uuid(),
-          name: 'Student',
-        },
-        {
-          id: faker.string.uuid(),
-          name: 'Team',
-        },
-      ],
-    },
   },
   {
     id: faker.string.uuid(),
@@ -50,14 +49,6 @@ const users = [
     email: faker.internet.email(),
     password: '123456',
     role: Role.ADMIN,
-    tags: {
-      create: [
-        {
-          id: faker.string.uuid(),
-          name: 'Teacher',
-        },
-      ],
-    },
   },
 ];
 
@@ -88,6 +79,11 @@ let contributors = [...Array(4)].map((_, i) => {
     deactivated_by_user_id: i < 2 ? users[0].id : null,
     whats_app_message_template_sent_at: null,
     unsubscribed_at: null,
+    tags: {
+      connect: {
+        name: tags[0].name,
+      },
+    },
   };
 });
 
@@ -120,6 +116,11 @@ contributors = [
       deactivated_by_user_id: i < 2 ? users[0].id : null,
       whats_app_message_template_sent_at: null,
       unsubscribed_at: null,
+      tags: {
+        connect: {
+          name: tags[1].name,
+        },
+      },
     };
   }),
 ].flat();
@@ -153,13 +154,18 @@ contributors = [
       deactivated_by_user_id: i < 2 ? users[0].id : null,
       whats_app_message_template_sent_at: null,
       unsubscribed_at: i % 3 == 0 ? faker.date.recent() : null,
+      tags: {
+        connect: {
+          name: tags[2].name,
+        },
+      },
     };
   }),
 ].flat();
 
 contributors = [
   ...contributors,
-  [...Array(35)].map((_, i) => {
+  [...Array(15)].map((_, i) => {
     return {
       id: faker.string.uuid(),
       first_name: faker.person.firstName(),
@@ -186,23 +192,51 @@ contributors = [
       deactivated_by_user_id: i < 2 ? users[0].id : null,
       whats_app_message_template_sent_at: null,
       unsubscribed_at: i % 3 == 0 ? faker.date.recent() : null,
+      tags: {
+        connect: {
+          name: tags[3].name,
+        },
+      },
     };
   }),
 ].flat();
 
-const requests = [...Array(20)].map((_, i) => {
+let requests = [...Array(10)].map((_, i) => {
   return {
     id: faker.string.uuid(),
     title: faker.word.words({ count: { min: 1, max: 4 } }),
     text: faker.lorem.sentences({ min: i, max: 20 }),
-    user_id: users[0].id,
     schedule_send_for: i % 3 == 0 ? faker.date.future() : faker.date.recent(),
     broadcasted_at: i % 3 != 0 ? faker.date.recent() : null,
+    tags: {
+      connect: {
+        name: tags[2].name,
+      },
+    },
   };
 });
 
+requests = [
+  ...requests,
+  [...Array(20)].map((_, i) => {
+    return {
+      id: faker.string.uuid(),
+      title: faker.word.words({ count: { min: 1, max: 4 } }),
+      text: faker.lorem.sentences({ min: i, max: 20 }),
+      schedule_send_for: i % 3 == 0 ? faker.date.future() : faker.date.recent(),
+      broadcasted_at: i % 3 != 0 ? faker.date.recent() : null,
+      tags: {
+        connect: {
+          name: tags[0].name,
+        },
+      },
+    };
+  }),
+].flat();
+
 module.exports = {
   users,
+  tags,
   contributors,
   requests,
 };

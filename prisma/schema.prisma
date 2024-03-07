@@ -8,6 +8,10 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator pothos {
+  provider = "prisma-pothos-types"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("POSTGRES_PRISMA_URL")
@@ -22,7 +26,7 @@ model User {
   role Role @default(USER)
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
-  tags Tag[]
+  requests Request[]
 }
 
 enum Role {
@@ -32,10 +36,11 @@ enum Role {
 
 model Tag {
   id String @id @default(uuid())
-  name String
+  name String @unique
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
-  users User[]
+  contributors Contributor[]
+  requests Request[]
 }
 
 model Contributor {
@@ -67,6 +72,7 @@ model Contributor {
   deactivated_by_admin Boolean @default(false)
   whats_app_message_template_sent_at DateTime?
   unsubscribed_at DateTime?
+  tags Tag[]
 }
 
 model Request {
@@ -75,7 +81,9 @@ model Request {
   text String?
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
+  user User @relation(fields: [user_id], references: [id])
   user_id String
   schedule_send_for DateTime
   broadcasted_at DateTime?
+  tags Tag[]
 }
