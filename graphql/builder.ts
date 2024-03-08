@@ -1,35 +1,24 @@
+import path from 'path';
 import SchemaBuilder from '@pothos/core';
 import PrismaPlugin from '@pothos/plugin-prisma';
-import type PrismaTypes from '@pothos/plugin-prisma/generated';
-import { DateTimeResolver, GraphQLBigInt } from 'graphql-scalars';
+import PrismaUtils from '@pothos/plugin-prisma-utils';
+import PothosPrismaGeneratorPlugin from 'pothos-prisma-generator';
+import PothosSchemaExporter from 'pothos-schema-exporter';
 import prisma from '@/app/lib/prisma';
 
-export const builder = new SchemaBuilder<{
-  PrismaTypes: PrismaTypes;
-  Scalars: {
-    DateTime: {
-      Input: Date;
-      Output: Date;
-    };
-    BigInt: {
-      Input: BigInt;
-      Output: BigInt;
-    };
-  };
-}>({
-  plugins: [PrismaPlugin],
+export const builder = new SchemaBuilder<{}>({
+  plugins: [
+    PrismaPlugin,
+    PrismaUtils,
+    PothosPrismaGeneratorPlugin,
+    PothosSchemaExporter,
+  ],
   prisma: {
     client: prisma,
   },
+  pothosSchemaExporter: {
+    output:
+      process.env.NODE_ENV === 'development' &&
+      path.join(process.cwd(), 'graphql', 'schema.graphql'),
+  },
 });
-
-builder.queryType({
-  fields: (t) => ({
-    ok: t.boolean({
-      resolve: () => true,
-    }),
-  }),
-});
-
-builder.addScalarType('DateTime', DateTimeResolver, {});
-builder.addScalarType('BigInt', GraphQLBigInt, {});

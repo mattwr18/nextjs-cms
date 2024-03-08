@@ -1,11 +1,17 @@
-import { fetchRequestById } from '@/app/lib/data';
+import { getClient } from '@/app/lib/ApolloClient';
+import { findUniqueRequest } from '@/app/lib/data';
 
 export default async function Page({
   params: { id },
 }: {
   params: { id: string };
 }) {
-  const request = await fetchRequestById(id);
+  const {
+    data: { findUniqueRequest: request },
+  } = await getClient().query({
+    query: findUniqueRequest,
+    variables: { filter: { id } },
+  });
 
   return (
     <main>

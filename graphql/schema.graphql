@@ -1,0 +1,839 @@
+"""
+The `BigInt` scalar type represents non-fractional signed whole numeric values.
+"""
+scalar BigInt
+
+"""
+The `Byte` scalar type represents byte value as a Buffer
+"""
+scalar Bytes
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar Json
+
+"""
+A field whose value is a hexadecimal: https://en.wikipedia.org/wiki/Hexadecimal.
+"""
+scalar Decimal
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum OrderBy {
+  Asc
+  Desc
+}
+
+input RequestFilter {
+  id: StringFilter
+  title: StringFilter
+  text: StringFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+  user: UserFilter
+  user_id: StringFilter
+  schedule_send_for: DateTimeFilter
+  broadcasted_at: DateTimeFilter
+  tags: TagListFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  not: StringFilter
+  is: String
+  isNot: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  not: DateTimeFilter
+  is: DateTime
+  isNot: DateTime
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+}
+
+input UserFilter {
+  id: StringFilter
+  first_name: StringFilter
+  last_name: StringFilter
+  email: StringFilter
+  password: StringFilter
+  role: RoleFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+  requests: RequestListFilter
+}
+
+input RoleFilter {
+  equals: Role
+  in: [Role!]
+  notIn: [Role!]
+  not: RoleFilter
+  is: Role
+  isNot: Role
+}
+
+input RequestListFilter {
+  every: RequestFilter
+  some: RequestFilter
+  none: RequestFilter
+}
+
+input TagFilter {
+  id: StringFilter
+  name: StringFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+  contributors: ContributorListFilter
+  requests: RequestListFilter
+}
+
+input ContributorFilter {
+  id: StringFilter
+  first_name: StringFilter
+  last_name: StringFilter
+  email: StringFilter
+  telegram_chat_id: BigIntFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+  username: StringFilter
+  telegram_id: BigIntFilter
+  note: StringFilter
+  zip_code: StringFilter
+  city: StringFilter
+  phone: StringFilter
+  deactivated_at: DateTimeFilter
+  threema_id: StringFilter
+  data_processing_consented_at: DateTimeFilter
+  telegram_onboarding_token: StringFilter
+  signal_phone_number: StringFilter
+  signal_onboarding_completed_at: DateTimeFilter
+  additional_email: StringFilter
+  additional_consent_given_at: DateTimeFilter
+  organization_id: StringFilter
+  whats_app_phone_number: StringFilter
+  whats_app_message_template_responded_at: DateTimeFilter
+  deactivated_by_user_id: StringFilter
+  deactivated_by_admin: BooleanFilter
+  whats_app_message_template_sent_at: DateTimeFilter
+  unsubscribed_at: DateTimeFilter
+  tags: TagListFilter
+}
+
+input BigIntFilter {
+  equals: BigInt
+  in: [BigInt!]
+  notIn: [BigInt!]
+  not: BigIntFilter
+  is: BigInt
+  isNot: BigInt
+  lt: BigInt
+  lte: BigInt
+  gt: BigInt
+  gte: BigInt
+}
+
+input BooleanFilter {
+  equals: Boolean
+  in: [Boolean!]
+  notIn: [Boolean!]
+  not: BooleanFilter
+  is: Boolean
+  isNot: Boolean
+}
+
+input TagListFilter {
+  every: TagFilter
+  some: TagFilter
+  none: TagFilter
+}
+
+input ContributorListFilter {
+  every: ContributorFilter
+  some: ContributorFilter
+  none: ContributorFilter
+}
+
+input RequestOrderBy {
+  id: OrderBy
+  title: OrderBy
+  text: OrderBy
+  created_at: OrderBy
+  updated_at: OrderBy
+  user: UserOrderBy
+  user_id: OrderBy
+  schedule_send_for: OrderBy
+  broadcasted_at: OrderBy
+  tags: TagOrderBy
+}
+
+input UserOrderBy {
+  id: OrderBy
+  first_name: OrderBy
+  last_name: OrderBy
+  email: OrderBy
+  password: OrderBy
+  role: OrderBy
+  created_at: OrderBy
+  updated_at: OrderBy
+  requests: RequestOrderBy
+}
+
+input TagOrderBy {
+  id: OrderBy
+  name: OrderBy
+  created_at: OrderBy
+  updated_at: OrderBy
+  contributors: ContributorOrderBy
+  requests: RequestOrderBy
+}
+
+input ContributorOrderBy {
+  id: OrderBy
+  first_name: OrderBy
+  last_name: OrderBy
+  email: OrderBy
+  telegram_chat_id: OrderBy
+  created_at: OrderBy
+  updated_at: OrderBy
+  username: OrderBy
+  telegram_id: OrderBy
+  note: OrderBy
+  zip_code: OrderBy
+  city: OrderBy
+  phone: OrderBy
+  deactivated_at: OrderBy
+  threema_id: OrderBy
+  data_processing_consented_at: OrderBy
+  telegram_onboarding_token: OrderBy
+  signal_phone_number: OrderBy
+  signal_onboarding_completed_at: OrderBy
+  additional_email: OrderBy
+  additional_consent_given_at: OrderBy
+  organization_id: OrderBy
+  whats_app_phone_number: OrderBy
+  whats_app_message_template_responded_at: OrderBy
+  deactivated_by_user_id: OrderBy
+  deactivated_by_admin: OrderBy
+  whats_app_message_template_sent_at: OrderBy
+  unsubscribed_at: OrderBy
+  tags: TagOrderBy
+}
+
+input UserUniqueFilter {
+  id: String
+  email: String
+}
+
+input TagUniqueFilter {
+  id: String
+  name: String
+}
+
+input ContributorUniqueFilter {
+  id: String
+}
+
+input RequestUniqueFilter {
+  id: String
+}
+
+input UserCreateInput {
+  id: String
+  first_name: String!
+  last_name: String!
+  email: String!
+  password: String!
+  role: Role
+  created_at: DateTime
+  updated_at: DateTime
+  requests: UserCreateRequestsRelationInput
+}
+
+input UserCreateRequestsRelationInput {
+  create: [RequestCreateInput!]
+  connect: [RequestUniqueFilter!]
+}
+
+input RequestCreateInput {
+  id: String
+  title: String!
+  text: String
+  created_at: DateTime
+  updated_at: DateTime
+  schedule_send_for: DateTime!
+  broadcasted_at: DateTime
+  tags: RequestCreateTagsRelationInput
+}
+
+input RequestCreateTagsRelationInput {
+  create: [TagCreateInput!]
+  connect: [TagUniqueFilter!]
+}
+
+input TagCreateInput {
+  id: String
+  name: String!
+  created_at: DateTime
+  updated_at: DateTime
+  contributors: TagCreateContributorsRelationInput
+}
+
+input TagCreateContributorsRelationInput {
+  create: [ContributorCreateInput!]
+  connect: [ContributorUniqueFilter!]
+}
+
+input ContributorCreateInput {
+  id: String
+  first_name: String!
+  last_name: String!
+  email: String
+  telegram_chat_id: BigInt
+  created_at: DateTime
+  updated_at: DateTime
+  username: String
+  telegram_id: BigInt
+  note: String
+  zip_code: String
+  city: String
+  phone: String
+  deactivated_at: DateTime
+  threema_id: String
+  data_processing_consented_at: DateTime
+  telegram_onboarding_token: String
+  signal_phone_number: String
+  signal_onboarding_completed_at: DateTime
+  additional_email: String
+  additional_consent_given_at: DateTime
+  organization_id: String
+  whats_app_phone_number: String
+  whats_app_message_template_responded_at: DateTime
+  deactivated_by_user_id: String
+  deactivated_by_admin: Boolean
+  whats_app_message_template_sent_at: DateTime
+  unsubscribed_at: DateTime
+}
+
+input UserUpdateInput {
+  id: String
+  first_name: String
+  last_name: String
+  email: String
+  password: String
+  role: Role
+  created_at: DateTime
+  updated_at: DateTime
+  requests: UserUpdateRequestsRelationInput
+}
+
+input UserUpdateRequestsRelationInput {
+  create: [RequestCreateInput!]
+  set: [RequestUniqueFilter!]
+  disconnect: [RequestUniqueFilter!]
+  delete: [RequestUniqueFilter!]
+  connect: [RequestUniqueFilter!]
+  update: [UserUpdateRequestsRelationInputUpdate!]
+  updateMany: [UserUpdateRequestsRelationInputUpdateMany!]
+  deleteMany: [RequestWithoutUserFilter!]
+}
+
+input RequestUpdateWithoutUserInput {
+  id: String
+  title: String
+  text: String
+  created_at: DateTime
+  updated_at: DateTime
+  schedule_send_for: DateTime
+  broadcasted_at: DateTime
+  tags: RequestUpdateTagsRelationInput
+}
+
+input RequestUpdateTagsRelationInput {
+  create: [TagCreateInput!]
+  set: [TagUniqueFilter!]
+  disconnect: [TagUniqueFilter!]
+  delete: [TagUniqueFilter!]
+  connect: [TagUniqueFilter!]
+  update: [RequestUpdateTagsRelationInputUpdate!]
+  updateMany: [RequestUpdateTagsRelationInputUpdateMany!]
+  deleteMany: [TagWithoutRequestsFilter!]
+}
+
+input TagUpdateWithoutRequestsInput {
+  id: String
+  name: String
+  created_at: DateTime
+  updated_at: DateTime
+  contributors: TagUpdateContributorsRelationInput
+}
+
+input TagUpdateContributorsRelationInput {
+  create: [ContributorCreateInput!]
+  set: [ContributorUniqueFilter!]
+  disconnect: [ContributorUniqueFilter!]
+  delete: [ContributorUniqueFilter!]
+  connect: [ContributorUniqueFilter!]
+  update: [TagUpdateContributorsRelationInputUpdate!]
+  updateMany: [TagUpdateContributorsRelationInputUpdateMany!]
+  deleteMany: [ContributorWithoutTagsFilter!]
+}
+
+input ContributorUpdateWithoutTagsInput {
+  id: String
+  first_name: String
+  last_name: String
+  email: String
+  telegram_chat_id: BigInt
+  created_at: DateTime
+  updated_at: DateTime
+  username: String
+  telegram_id: BigInt
+  note: String
+  zip_code: String
+  city: String
+  phone: String
+  deactivated_at: DateTime
+  threema_id: String
+  data_processing_consented_at: DateTime
+  telegram_onboarding_token: String
+  signal_phone_number: String
+  signal_onboarding_completed_at: DateTime
+  additional_email: String
+  additional_consent_given_at: DateTime
+  organization_id: String
+  whats_app_phone_number: String
+  whats_app_message_template_responded_at: DateTime
+  deactivated_by_user_id: String
+  deactivated_by_admin: Boolean
+  whats_app_message_template_sent_at: DateTime
+  unsubscribed_at: DateTime
+}
+
+input ContributorWithoutTagsFilter {
+  id: StringFilter
+  first_name: StringFilter
+  last_name: StringFilter
+  email: StringFilter
+  telegram_chat_id: BigIntFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+  username: StringFilter
+  telegram_id: BigIntFilter
+  note: StringFilter
+  zip_code: StringFilter
+  city: StringFilter
+  phone: StringFilter
+  deactivated_at: DateTimeFilter
+  threema_id: StringFilter
+  data_processing_consented_at: DateTimeFilter
+  telegram_onboarding_token: StringFilter
+  signal_phone_number: StringFilter
+  signal_onboarding_completed_at: DateTimeFilter
+  additional_email: StringFilter
+  additional_consent_given_at: DateTimeFilter
+  organization_id: StringFilter
+  whats_app_phone_number: StringFilter
+  whats_app_message_template_responded_at: DateTimeFilter
+  deactivated_by_user_id: StringFilter
+  deactivated_by_admin: BooleanFilter
+  whats_app_message_template_sent_at: DateTimeFilter
+  unsubscribed_at: DateTimeFilter
+}
+
+input TagUpdateContributorsRelationInputUpdate {
+  where: ContributorUniqueFilter
+  data: ContributorUpdateWithoutTagsInput
+}
+
+input TagUpdateContributorsRelationInputUpdateMany {
+  where: ContributorWithoutTagsFilter
+  data: ContributorUpdateWithoutTagsInput
+}
+
+input TagWithoutRequestsFilter {
+  id: StringFilter
+  name: StringFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+  contributors: ContributorListFilter
+}
+
+input RequestUpdateTagsRelationInputUpdate {
+  where: TagUniqueFilter
+  data: TagUpdateWithoutRequestsInput
+}
+
+input RequestUpdateTagsRelationInputUpdateMany {
+  where: TagWithoutRequestsFilter
+  data: TagUpdateWithoutRequestsInput
+}
+
+input RequestWithoutUserFilter {
+  id: StringFilter
+  title: StringFilter
+  text: StringFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+  schedule_send_for: DateTimeFilter
+  broadcasted_at: DateTimeFilter
+  tags: TagListFilter
+}
+
+input UserUpdateRequestsRelationInputUpdate {
+  where: RequestUniqueFilter
+  data: RequestUpdateWithoutUserInput
+}
+
+input UserUpdateRequestsRelationInputUpdateMany {
+  where: RequestWithoutUserFilter
+  data: RequestUpdateWithoutUserInput
+}
+
+input TagUpdateInput {
+  id: String
+  name: String
+  created_at: DateTime
+  updated_at: DateTime
+  contributors: TagUpdateContributorsRelationInput
+  requests: TagUpdateRequestsRelationInput
+}
+
+input TagUpdateRequestsRelationInput {
+  create: [RequestCreateInput!]
+  set: [RequestUniqueFilter!]
+  disconnect: [RequestUniqueFilter!]
+  delete: [RequestUniqueFilter!]
+  connect: [RequestUniqueFilter!]
+  update: [TagUpdateRequestsRelationInputUpdate!]
+  updateMany: [TagUpdateRequestsRelationInputUpdateMany!]
+  deleteMany: [RequestWithoutTagsFilter!]
+}
+
+input RequestUpdateWithoutTagsInput {
+  id: String
+  title: String
+  text: String
+  created_at: DateTime
+  updated_at: DateTime
+  user: RequestUpdateUserRelationInput
+  schedule_send_for: DateTime
+  broadcasted_at: DateTime
+}
+
+input RequestUpdateUserRelationInput {
+  create: UserCreateInput
+  update: UserUpdateWithoutRequestsInput
+  connect: UserUniqueFilter
+}
+
+input UserUpdateWithoutRequestsInput {
+  id: String
+  first_name: String
+  last_name: String
+  email: String
+  password: String
+  role: Role
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input RequestWithoutTagsFilter {
+  id: StringFilter
+  title: StringFilter
+  text: StringFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+  user: UserFilter
+  user_id: StringFilter
+  schedule_send_for: DateTimeFilter
+  broadcasted_at: DateTimeFilter
+}
+
+input TagUpdateRequestsRelationInputUpdate {
+  where: RequestUniqueFilter
+  data: RequestUpdateWithoutTagsInput
+}
+
+input TagUpdateRequestsRelationInputUpdateMany {
+  where: RequestWithoutTagsFilter
+  data: RequestUpdateWithoutTagsInput
+}
+
+input ContributorUpdateInput {
+  id: String
+  first_name: String
+  last_name: String
+  email: String
+  telegram_chat_id: BigInt
+  created_at: DateTime
+  updated_at: DateTime
+  username: String
+  telegram_id: BigInt
+  note: String
+  zip_code: String
+  city: String
+  phone: String
+  deactivated_at: DateTime
+  threema_id: String
+  data_processing_consented_at: DateTime
+  telegram_onboarding_token: String
+  signal_phone_number: String
+  signal_onboarding_completed_at: DateTime
+  additional_email: String
+  additional_consent_given_at: DateTime
+  organization_id: String
+  whats_app_phone_number: String
+  whats_app_message_template_responded_at: DateTime
+  deactivated_by_user_id: String
+  deactivated_by_admin: Boolean
+  whats_app_message_template_sent_at: DateTime
+  unsubscribed_at: DateTime
+  tags: ContributorUpdateTagsRelationInput
+}
+
+input ContributorUpdateTagsRelationInput {
+  create: [TagCreateInput!]
+  set: [TagUniqueFilter!]
+  disconnect: [TagUniqueFilter!]
+  delete: [TagUniqueFilter!]
+  connect: [TagUniqueFilter!]
+  update: [ContributorUpdateTagsRelationInputUpdate!]
+  updateMany: [ContributorUpdateTagsRelationInputUpdateMany!]
+  deleteMany: [TagWithoutContributorsFilter!]
+}
+
+input TagUpdateWithoutContributorsInput {
+  id: String
+  name: String
+  created_at: DateTime
+  updated_at: DateTime
+  requests: TagUpdateRequestsRelationInput
+}
+
+input TagWithoutContributorsFilter {
+  id: StringFilter
+  name: StringFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+  requests: RequestListFilter
+}
+
+input ContributorUpdateTagsRelationInputUpdate {
+  where: TagUniqueFilter
+  data: TagUpdateWithoutContributorsInput
+}
+
+input ContributorUpdateTagsRelationInputUpdateMany {
+  where: TagWithoutContributorsFilter
+  data: TagUpdateWithoutContributorsInput
+}
+
+input RequestUpdateInput {
+  id: String
+  title: String
+  text: String
+  created_at: DateTime
+  updated_at: DateTime
+  user: RequestUpdateUserRelationInput
+  schedule_send_for: DateTime
+  broadcasted_at: DateTime
+  tags: RequestUpdateTagsRelationInput
+}
+
+type User {
+  id: ID!
+  first_name: String!
+  last_name: String!
+  email: String!
+  password: String!
+  role: Role!
+  created_at: DateTime!
+  updated_at: DateTime!
+  requests(
+    filter: RequestFilter
+    orderBy: [RequestOrderBy!]
+    limit: Int
+    offset: Int
+  ): [Request!]!
+  requestsCount(filter: RequestFilter): Int!
+}
+
+type Tag {
+  id: ID!
+  name: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  contributors(
+    filter: ContributorFilter
+    orderBy: [ContributorOrderBy!]
+    limit: Int
+    offset: Int
+  ): [Contributor!]!
+  contributorsCount(filter: ContributorFilter): Int!
+  requests(
+    filter: RequestFilter
+    orderBy: [RequestOrderBy!]
+    limit: Int
+    offset: Int
+  ): [Request!]!
+  requestsCount(filter: RequestFilter): Int!
+}
+
+type Contributor {
+  id: ID!
+  first_name: String!
+  last_name: String!
+  email: String
+  telegram_chat_id: BigInt
+  created_at: DateTime!
+  updated_at: DateTime!
+  username: String
+  telegram_id: BigInt
+  note: String
+  zip_code: String
+  city: String
+  phone: String
+  deactivated_at: DateTime
+  threema_id: String
+  data_processing_consented_at: DateTime
+  telegram_onboarding_token: String
+  signal_phone_number: String
+  signal_onboarding_completed_at: DateTime
+  additional_email: String
+  additional_consent_given_at: DateTime
+  organization_id: String
+  whats_app_phone_number: String
+  whats_app_message_template_responded_at: DateTime
+  deactivated_by_user_id: String
+  deactivated_by_admin: Boolean!
+  whats_app_message_template_sent_at: DateTime
+  unsubscribed_at: DateTime
+  tags(
+    filter: TagFilter
+    orderBy: [TagOrderBy!]
+    limit: Int
+    offset: Int
+  ): [Tag!]!
+  tagsCount(filter: TagFilter): Int!
+}
+
+type Request {
+  id: ID!
+  title: String!
+  text: String
+  created_at: DateTime!
+  updated_at: DateTime!
+  user: User!
+  user_id: String!
+  schedule_send_for: DateTime!
+  broadcasted_at: DateTime
+  tags(
+    filter: TagFilter
+    orderBy: [TagOrderBy!]
+    limit: Int
+    offset: Int
+  ): [Tag!]!
+  tagsCount(filter: TagFilter): Int!
+}
+
+type Query {
+  countUser(filter: UserFilter): Int!
+  countTag(filter: TagFilter): Int!
+  countContributor(filter: ContributorFilter): Int!
+  countRequest(filter: RequestFilter): Int!
+  findUniqueUser(filter: UserUniqueFilter!): User!
+  findUniqueTag(filter: TagUniqueFilter!): Tag!
+  findUniqueContributor(filter: ContributorUniqueFilter!): Contributor!
+  findUniqueRequest(filter: RequestUniqueFilter!): Request!
+  findFirstUser(filter: UserFilter, orderBy: [UserOrderBy!]): User
+  findFirstTag(filter: TagFilter, orderBy: [TagOrderBy!]): Tag
+  findFirstContributor(
+    filter: ContributorFilter
+    orderBy: [ContributorOrderBy!]
+  ): Contributor
+  findFirstRequest(filter: RequestFilter, orderBy: [RequestOrderBy!]): Request
+  findManyUser(
+    filter: UserFilter
+    orderBy: [UserOrderBy!]
+    limit: Int
+    offset: Int
+  ): [User!]!
+  findManyTag(
+    filter: TagFilter
+    orderBy: [TagOrderBy!]
+    limit: Int
+    offset: Int
+  ): [Tag!]!
+  findManyContributor(
+    filter: ContributorFilter
+    orderBy: [ContributorOrderBy!]
+    limit: Int
+    offset: Int
+  ): [Contributor!]!
+  findManyRequest(
+    filter: RequestFilter
+    orderBy: [RequestOrderBy!]
+    limit: Int
+    offset: Int
+  ): [Request!]!
+}
+
+type Mutation {
+  createOneUser(input: UserCreateInput!): User!
+  createOneTag(input: TagCreateInput!): Tag!
+  createOneContributor(input: ContributorCreateInput!): Contributor!
+  createOneRequest(input: RequestCreateInput!): Request!
+  createManyUser(input: [UserCreateInput!]!): Int!
+  createManyTag(input: [TagCreateInput!]!): Int!
+  createManyContributor(input: [ContributorCreateInput!]!): Int!
+  createManyRequest(input: [RequestCreateInput!]!): Int!
+  updateOneUser(where: UserUniqueFilter!, data: UserUpdateInput!): User!
+  updateOneTag(where: TagUniqueFilter!, data: TagUpdateInput!): Tag!
+  updateOneContributor(
+    where: ContributorUniqueFilter!
+    data: ContributorUpdateInput!
+  ): Contributor!
+  updateOneRequest(
+    where: RequestUniqueFilter!
+    data: RequestUpdateInput!
+  ): Request!
+  updateManyUser(where: UserFilter!, data: UserUpdateInput!): Int!
+  updateManyTag(where: TagFilter!, data: TagUpdateInput!): Int!
+  updateManyContributor(
+    where: ContributorFilter!
+    data: ContributorUpdateInput!
+  ): Int!
+  updateManyRequest(where: RequestFilter!, data: RequestUpdateInput!): Int!
+  deleteOneUser(where: UserUniqueFilter!): User!
+  deleteOneTag(where: TagUniqueFilter!): Tag!
+  deleteOneContributor(where: ContributorUniqueFilter!): Contributor!
+  deleteOneRequest(where: RequestUniqueFilter!): Request!
+  deleteManyUser(where: UserFilter!): Int!
+  deleteManyTag(where: TagFilter!): Int!
+  deleteManyContributor(where: ContributorFilter!): Int!
+  deleteManyRequest(where: RequestFilter!): Int!
+}

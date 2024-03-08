@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useTranslation } from '@/app/i18n';
-import { fetchContributorById } from '@/app/lib/data';
+import { getClient } from '@/app/lib/ApolloClient';
+import { findUniqueContributor } from '@/app/lib/data';
 import { fullName } from '@/app/lib/utils';
 import Avatar from '@/app/[lng]/ui/Avatar';
 import styles from './page.module.scss';
@@ -11,7 +12,12 @@ export default async function Page({
   params: { id: string; lng: string };
 }) {
   const { t } = await useTranslation(lng, 'contributor');
-  const contributor = await fetchContributorById(id);
+  const {
+    data: { findUniqueContributor: contributor },
+  } = await getClient().query({
+    query: findUniqueContributor,
+    variables: { filter: { id } },
+  });
   return (
     <main className={styles.main}>
       <header className={styles.pageHeader}>
@@ -25,7 +31,7 @@ export default async function Page({
           </h1>
           <p>
             {t('contributor-since-date', {
-              date: contributor.created_at.toLocaleDateString('de'),
+              date: new Date(contributor.created_at).toLocaleDateString('de'),
               interpolation: { escapeValue: false },
             })}
           </p>

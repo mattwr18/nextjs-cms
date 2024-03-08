@@ -1,134 +1,62 @@
-import { sql } from '@vercel/postgres';
-import { User, Contributor, Request } from './definitions';
-import { unstable_noStore as noStore } from 'next/cache';
+import gql from 'graphql-tag';
 
-export async function fetchContributors(state?: string) {
-  noStore();
-
-  try {
-    let query = `SELECT * FROM contributors WHERE deactivated_at IS NULL AND unsubscribed_at IS NULL`;
-
-    if (state == 'inactive') {
-      query = `SELECT * FROM contributors WHERE deactivated_at IS NOT NULL`;
+export const findManyContributor = gql`
+  query findManyContributor($filter: ContributorFilter) {
+    findManyContributor(filter: $filter) {
+      id
+      first_name
+      last_name
+      email
+      signal_phone_number
+      telegram_id
+      threema_id
+      whats_app_phone_number
     }
+  }
+`;
 
-    if (state == 'unsubscribed') {
-      query = `SELECT * FROM contributors WHERE unsubscribed_at IS NOT NULL`;
+export const contributorsCount = gql`
+  query countContributor($filter: ContributorFilter) {
+    countContributor(filter: $filter)
+  }
+`;
+
+export const findManyRequest = gql`
+  query findManyContributor($filter: RequestFilter) {
+    findManyRequest(filter: $filter) {
+      id
+      title
+      text
+      created_at
+      broadcasted_at
+      schedule_send_for
     }
-
-    const { rows } = await sql.query(query);
-    return rows;
-  } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Falied to fetch contributors');
   }
-}
+`;
 
-export async function fetchActiveContributorsCount() {
-  try {
-    const { rows } =
-      await sql`SELECT COUNT(*) FROM contributors WHERE deactivated_at IS NULL AND unsubscribed_at IS NULL`;
-    return rows[0].count;
-  } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Falied to fetch active contributors count');
+export const requestsCount = gql`
+  query countRequest($filter: RequestFilter) {
+    countRequest(filter: $filter)
   }
-}
+`;
 
-export async function fetchInactiveContributorsCount() {
-  try {
-    const { rows } =
-      await sql`SELECT COUNT(*) FROM contributors WHERE deactivated_at IS NOT NULL`;
-    return rows[0].count;
-  } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Falied to fetch inactive contributors count');
-  }
-}
-
-export async function fetchUnsubscribedContributorsCount() {
-  try {
-    const { rows } =
-      await sql`SELECT COUNT(*) FROM contributors WHERE unsubscribed_at IS NOT NULL`;
-    return rows[0].count;
-  } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Falied to fetch active contributors count');
-  }
-}
-
-export async function fetchRequests(filter?: string) {
-  noStore();
-
-  try {
-    let query = `SELECT * FROM requests WHERE broadcasted_at IS NOT NULL`;
-
-    if (filter == 'planned') {
-      query = `SELECT * FROM requests WHERE schedule_send_for IS NOT NULL AND (schedule_send_for > NOW())`;
+export const findUniqueContributor = gql`
+  query findUniqueContributor($filter: ContributorUniqueFilter!) {
+    findUniqueContributor(filter: $filter) {
+      id
+      first_name
+      last_name
+      created_at
     }
-    const { rows } = await sql.query(query);
-    return rows;
-  } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Falied to fetch requests');
   }
-}
+`;
 
-export async function fetchSentRequestsCount() {
-  try {
-    const { rows } =
-      await sql`SELECT COUNT(*) FROM requests WHERE broadcasted_at IS NOT NULL`;
-    return rows[0].count;
-  } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Falied to fetch sent requests count');
+export const findUniqueRequest = gql`
+  query findUniqueRequet($filter: RequestUniqueFilter!) {
+    findUniqueRequest(filter: $filter) {
+      id
+      title
+      text
+    }
   }
-}
-
-export async function fetchPlannedRequestsCount() {
-  try {
-    const { rows } =
-      await sql`SELECT COUNT(*) FROM requests WHERE schedule_send_for IS NOT NULL AND (schedule_send_for > NOW())`;
-
-    return rows[0].count;
-  } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Falied to fetch planned requests count');
-  }
-}
-
-export async function getUser(email: string) {
-  try {
-    const { rows } = await sql`SELECT * FROM users WHERE email=${email}`;
-    return rows[0] as User;
-  } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Falied to fetch user.');
-  }
-}
-
-export async function fetchContributorById(id: string) {
-  noStore();
-
-  try {
-    const { rows } =
-      await sql<Contributor>`SELECT * FROM contributors WHERE contributors.id = ${id}`;
-    return rows[0];
-  } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Falied to fetch contributor.');
-  }
-}
-
-export async function fetchRequestById(id: string) {
-  noStore();
-
-  try {
-    const { rows } =
-      await sql<Request>`SELECT * FROM requests WHERE requests.id = ${id}`;
-    return rows[0];
-  } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Falied to fetch request.');
-  }
-}
+`;

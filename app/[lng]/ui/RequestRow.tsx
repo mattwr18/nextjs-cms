@@ -25,11 +25,14 @@ export default async function RequestRow({
     };
     if (broadcasted_at) {
       text = t('request-sent-at', {
-        date: broadcasted_at.toLocaleDateString(lng, localeOptions),
+        date: new Date(broadcasted_at).toLocaleDateString(lng, localeOptions),
       });
     } else {
       text = t('request-planned-for', {
-        date: schedule_send_for.toLocaleDateString(lng, localeOptions),
+        date: new Date(schedule_send_for).toLocaleDateString(
+          lng,
+          localeOptions,
+        ),
       });
     }
     return text;

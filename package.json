@@ -11,8 +11,12 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@apollo/client": "^3.9.6",
+    "@apollo/experimental-nextjs-app-support": "^0.8.0",
     "@pothos/core": "^3.41.0",
     "@pothos/plugin-prisma": "^3.65.0",
+    "@pothos/plugin-prisma-utils": "^0.14.0",
+    "@pothos/plugin-scope-auth": "^3.21.1",
     "@prisma/client": "^5.10.2",
     "@vercel/postgres": "^0.7.2",
     "accept-language": "^3.0.18",
@@ -25,6 +29,8 @@
     "i18next-resources-to-backend": "^1.2.0",
     "next": "14.1.0",
     "next-i18next": "^15.2.0",
+    "pothos-prisma-generator": "^1.0.2",
+    "pothos-schema-exporter": "^1.0.0",
     "react": "^18",
     "react-dom": "^18",
     "react-i18next": "^14.0.5",

@@ -1,10 +1,7 @@
 import Link from 'next/link';
 import { useTranslation } from '@/app/i18n';
-import {
-  fetchRequests,
-  fetchSentRequestsCount,
-  fetchPlannedRequestsCount,
-} from '@/app/lib/data';
+import { findManyRequest, requestsCount } from '@/app/lib/data';
+import { getClient } from '@/app/lib/ApolloClient';
 import PageHeader from '@/app/[lng]/ui/PageHeader';
 import RequestsList from '@/app/[lng]/ui/RequestsList';
 import styles from './page.module.scss';
@@ -23,9 +20,24 @@ export default async function Page({
   const { t } = await useTranslation(lng, 'requests');
   const query = searchParams?.filter || '';
 
-  const [sentRequestsCount, plannedRequestsCount] = await Promise.all([
-    fetchSentRequestsCount(),
-    fetchPlannedRequestsCount(),
+  const [
+    {
+      data: { countRequest: sentRequestsCount },
+    },
+    {
+      data: { countRequest: plannedRequestsCount },
+    },
+  ] = await Promise.all([
+    getClient().query({
+      query: requestsCount,
+      variables: { filter: { broadcasted_at: { not: null } } },
+    }),
+    getClient().query({
+      query: requestsCount,
+      variables: {
+        filter: { schedule_send_for: { gt: new Date().toISOString() } },
+      },
+    }),
   ]);
   const tabBarItems = [
     {
@@ -39,9 +51,16 @@ export default async function Page({
       searchParam: { name: 'filter', value: 'planned' },
     },
   ];
-
-  const requests = await fetchRequests(query);
-
+  const filter =
+    query == 'planned'
+      ? { schedule_send_for: { gt: new Date().toISOString() } }
+      : { broadcasted_at: { not: null } };
+  const {
+    data: { findManyRequest: requests },
+  } = await getClient().query({
+    query: findManyRequest,
+    variables: { filter },
+  });
   return (
     <main className={styles.main}>
       <PageHeader tabBarItems={tabBarItems}>
