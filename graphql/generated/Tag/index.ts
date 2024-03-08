@@ -1,0 +1,35 @@
+export {
+  TagObject,
+  TagIdFieldObject,
+  TagNameFieldObject,
+  TagCreated_atFieldObject,
+  TagUpdated_atFieldObject,
+  TagContributorsFieldObject,
+  TagRequestsFieldObject,
+} from './object.base';
+export {
+  createManyTagMutation,
+  createOneTagMutation,
+  deleteManyTagMutation,
+  deleteOneTagMutation,
+  updateManyTagMutation,
+  updateOneTagMutation,
+  upsertOneTagMutation,
+  createManyTagMutationObject,
+  createOneTagMutationObject,
+  deleteManyTagMutationObject,
+  deleteOneTagMutationObject,
+  updateManyTagMutationObject,
+  updateOneTagMutationObject,
+  upsertOneTagMutationObject,
+} from './mutations';
+export {
+  findFirstTagQuery,
+  findManyTagQuery,
+  countTagQuery,
+  findUniqueTagQuery,
+  findFirstTagQueryObject,
+  findManyTagQueryObject,
+  countTagQueryObject,
+  findUniqueTagQueryObject,
+} from './queries';

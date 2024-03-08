@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useTranslation } from '@/app/i18n';
-import { findManyRequest, requestsCount } from '@/app/lib/data';
+import { findManyRequest, requestsCount } from '@/app/api/graphql/queries';
 import { getClient } from '@/app/lib/ApolloClient';
 import PageHeader from '@/app/[lng]/ui/PageHeader';
 import RequestsList from '@/app/[lng]/ui/RequestsList';
@@ -30,12 +30,12 @@ export default async function Page({
   ] = await Promise.all([
     getClient().query({
       query: requestsCount,
-      variables: { filter: { broadcasted_at: { not: null } } },
+      variables: { where: { broadcasted_at: { not: null } } },
     }),
     getClient().query({
       query: requestsCount,
       variables: {
-        filter: { schedule_send_for: { gt: new Date().toISOString() } },
+        where: { schedule_send_for: { gt: new Date().toISOString() } },
       },
     }),
   ]);
@@ -51,7 +51,7 @@ export default async function Page({
       searchParam: { name: 'filter', value: 'planned' },
     },
   ];
-  const filter =
+  const where =
     query == 'planned'
       ? { schedule_send_for: { gt: new Date().toISOString() } }
       : { broadcasted_at: { not: null } };
@@ -59,7 +59,7 @@ export default async function Page({
     data: { findManyRequest: requests },
   } = await getClient().query({
     query: findManyRequest,
-    variables: { filter },
+    variables: { where },
   });
   return (
     <main className={styles.main}>

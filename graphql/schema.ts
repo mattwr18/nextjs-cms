@@ -1,7 +1,6 @@
 import { builder } from './builder';
-// import './types/User';
-// import './types/Tag';
-// import './types/Contributor';
-// import './types/Request';
+import { generateAllCrud } from './generated/autocrud';
+generateAllCrud();
 
+builder.mutationType({});
 export const schema = builder.toSchema();

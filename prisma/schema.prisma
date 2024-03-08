@@ -10,11 +10,12 @@ generator client {
 
 generator pothos {
   provider = "prisma-pothos-types"
+  clientOutput = "@prisma/client"
+  output = "./pothos-types.ts"
 }
 
 generator pothosCrud {
   provider = "prisma-generator-pothos-codegen"
-  generatorConfigPath = "./pothos.config.js"
 }
 
 datasource db {

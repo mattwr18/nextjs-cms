@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useTranslation } from '@/app/i18n';
 import { getClient } from '@/app/lib/ApolloClient';
-import { findUniqueContributor } from '@/app/lib/data';
+import { findUniqueContributor } from '@/app/api/graphql/queries';
 import { fullName } from '@/app/lib/utils';
 import Avatar from '@/app/[lng]/ui/Avatar';
 import styles from './page.module.scss';
@@ -16,7 +16,7 @@ export default async function Page({
     data: { findUniqueContributor: contributor },
   } = await getClient().query({
     query: findUniqueContributor,
-    variables: { filter: { id } },
+    variables: { where: { id } },
   });
   return (
     <main className={styles.main}>

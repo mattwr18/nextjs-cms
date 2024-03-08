@@ -1,5 +1,5 @@
 import { getClient } from '@/app/lib/ApolloClient';
-import { findUniqueRequest } from '@/app/lib/data';
+import { findUniqueRequest } from '@/app/api/graphql/queries';
 
 export default async function Page({
   params: { id },
@@ -10,7 +10,7 @@ export default async function Page({
     data: { findUniqueRequest: request },
   } = await getClient().query({
     query: findUniqueRequest,
-    variables: { filter: { id } },
+    variables: { where: { id } },
   });
 
   return (

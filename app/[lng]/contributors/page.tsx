@@ -1,6 +1,9 @@
 import { useTranslation } from '@/app/i18n';
 import { getClient } from '@/app/lib/ApolloClient';
-import { findManyContributor, contributorsCount } from '@/app/lib/data';
+import {
+  findManyContributor,
+  contributorsCount,
+} from '@/app/api/graphql/queries';
 import PageHeader from '@/app/[lng]/ui/PageHeader';
 import CopyButton from '@/app/[lng]/ui/CopyButton';
 import ContributorsList from '@/app/[lng]/ui/ContributorsList';
@@ -30,19 +33,19 @@ export default async function Page({
   ] = await Promise.all([
     getClient().query({
       query: contributorsCount,
-      variables: { filter: { deactivated_at: null, unsubscribed_at: null } },
+      variables: { where: { deactivated_at: null, unsubscribed_at: null } },
     }),
     getClient().query({
       query: contributorsCount,
-      variables: { filter: { deactivated_at: { not: null } } },
+      variables: { where: { deactivated_at: { not: null } } },
     }),
     getClient().query({
       query: contributorsCount,
-      variables: { filter: { unsubscribed_at: { not: null } } },
+      variables: { where: { unsubscribed_at: { not: null } } },
     }),
   ]);
 
-  const filter = () => {
+  const where = () => {
     switch (query) {
       case 'inactive':
         return { deactivated_at: { not: null } };
@@ -56,7 +59,7 @@ export default async function Page({
     data: { findManyContributor: contributors },
   } = await getClient().query({
     query: findManyContributor,
-    variables: { filter: filter() },
+    variables: { where: where() },
   });
   const tabBarItems = [
     {
