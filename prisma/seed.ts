@@ -39,7 +39,7 @@ async function main() {
           prisma.tag.upsert({
             where: { name: tag.name },
             update: {},
-            create: { name: tag.name },
+            create: { name: tag.name, id: tag.id },
           }),
         ),
       );
