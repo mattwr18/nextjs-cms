@@ -1,7 +1,7 @@
 import path from 'path';
 import SchemaBuilder from '@pothos/core';
 import { Scalars } from 'prisma-generator-pothos-codegen';
-import type PrismaTypes from '@pothos/plugin-prisma/generated';
+import type PrismaTypes from '@/prisma/pothos-types';
 import PrismaPlugin from '@pothos/plugin-prisma';
 import prisma from '@/app/lib/prisma';
 import { Prisma } from '.prisma/client';
