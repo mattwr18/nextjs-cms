@@ -5,6 +5,11 @@
 
   margin-top: $spacing-unit-l;
 
+  .fieldset {
+    margin-bottom: $spacing-unit-l;
+    border: 0;
+  }
+
   .label {
     font-size: calc(1.2 * #{$font-size});
     font-weight: 600;
@@ -15,16 +20,17 @@
     margin-bottom: $spacing-unit-xs;
   }
 
+  .errorMessage {
+    font-size: $font-size-s;
+    color: $color-red;
+  }
+
   .input {
     @include input-styles;
-
-    margin-bottom: $spacing-unit-l;
   }
 
   .textarea {
     @include textarea-styles;
-
-    margin-bottom: $spacing-unit-l;
   }
 
   .button {
