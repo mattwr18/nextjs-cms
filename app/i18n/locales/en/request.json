@@ -1,4 +1,24 @@
 {
   "request-sent-at": "Request sent on {{date}}",
-  "request-planned-for": "Request planned for {{date}}"
+  "request-planned-for": "Request planned for {{date}}",
+  "new-request": {
+    "main-heading": "Ask a new question",
+    "header-explanation": "Find out what moves your community",
+    "form": {
+      "title": {
+        "label": "Title",
+        "help-text": "So that you can keep track of all your questions. The title is sent to community members on some channels for their information.",
+        "placeholder": "e.g. topic of the question"
+      },
+      "text": {
+        "label": "What would you like to know?",
+        "help-text": "Choose a short, simple formulation. Describe exactly what information you need.",
+        "placeholder": "Enter your question here..."
+      },
+      "schedule-send-for": {
+        "label": "Schedule shipment. Your question will be sent automatically at the set time."
+      },
+      "submit-button": "Send a question to the community"
+    }
+  }
 }
