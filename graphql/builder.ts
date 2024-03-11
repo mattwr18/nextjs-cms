@@ -1,12 +1,18 @@
 import path from 'path';
 import SchemaBuilder from '@pothos/core';
-// import { Scalars } from 'prisma-generator-pothos-codegen';
+import { Scalars } from 'prisma-generator-pothos-codegen';
 import type PrismaTypes from '@pothos/plugin-prisma/generated';
 import PrismaPlugin from '@pothos/plugin-prisma';
 import prisma from '@/app/lib/prisma';
+import { Prisma } from '.prisma/client';
 
 export const builder = new SchemaBuilder<{
   PrismaTypes: PrismaTypes;
+  Scalars: Scalars<
+    Prisma.Decimal,
+    Prisma.InputJsonValue | null,
+    Prisma.InputJsonValue
+  >;
 }>({
   plugins: [PrismaPlugin],
   prisma: {
