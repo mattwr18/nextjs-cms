@@ -217,28 +217,30 @@ export const whatsAppContributors: Prisma.ContributorCreateInput[] = Array.from(
   };
 });
 
-export const sentRequests = Array.from(
-  Array(10),
-).map((_, i) => {
+export const sentRequests = Array.from(Array(10)).map((_, i) => {
   return {
     id: faker.string.uuid(),
     title: faker.word.words({ count: { min: 1, max: 4 } }),
     text: faker.lorem.sentences({ min: i, max: 20 }),
-    schedule_send_for: i % 3 == 0 ? faker.date.future().toISOString() : faker.date.recent().toISOString(),
+    schedule_send_for:
+      i % 3 == 0
+        ? faker.date.future().toISOString()
+        : faker.date.recent().toISOString(),
     broadcasted_at: i % 3 != 0 ? faker.date.recent().toISOString() : null,
     created_at: faker.date.recent().toISOString(),
     updated_at: faker.date.recent().toISOString(),
   };
 });
 
-export const plannedRequests = Array.from(
-  Array(20),
-).map((_, i) => {
+export const plannedRequests = Array.from(Array(20)).map((_, i) => {
   return {
     id: faker.string.uuid(),
     title: faker.word.words({ count: { min: 1, max: 4 } }),
     text: faker.lorem.sentences({ min: i, max: 20 }),
-    schedule_send_for: i % 3 == 0 ? faker.date.future().toISOString() : faker.date.recent().toISOString(),
+    schedule_send_for:
+      i % 3 == 0
+        ? faker.date.future().toISOString()
+        : faker.date.recent().toISOString(),
     broadcasted_at: i % 3 != 0 ? faker.date.recent().toISOString() : null,
     created_at: faker.date.recent().toISOString(),
     updated_at: faker.date.recent().toISOString(),
