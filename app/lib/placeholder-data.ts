@@ -217,50 +217,30 @@ export const whatsAppContributors: Prisma.ContributorCreateInput[] = Array.from(
   };
 });
 
-export const sentRequests: Prisma.RequestCreateInput[] = Array.from(
+export const sentRequests = Array.from(
   Array(10),
 ).map((_, i) => {
   return {
     id: faker.string.uuid(),
     title: faker.word.words({ count: { min: 1, max: 4 } }),
     text: faker.lorem.sentences({ min: i, max: 20 }),
-    schedule_send_for: i % 3 == 0 ? faker.date.future() : faker.date.recent(),
-    broadcasted_at: i % 3 != 0 ? faker.date.recent() : null,
-    created_at: faker.date.recent(),
-    updated_at: faker.date.recent(),
-    user: {
-      connect: {
-        id: users[0].id,
-      },
-    },
-    tags: {
-      connect: {
-        name: tags[2].name,
-      },
-    },
+    schedule_send_for: i % 3 == 0 ? faker.date.future().toISOString() : faker.date.recent().toISOString(),
+    broadcasted_at: i % 3 != 0 ? faker.date.recent().toISOString() : null,
+    created_at: faker.date.recent().toISOString(),
+    updated_at: faker.date.recent().toISOString(),
   };
 });
 
-export const plannedRequests: Prisma.RequestCreateInput[] = Array.from(
+export const plannedRequests = Array.from(
   Array(20),
 ).map((_, i) => {
   return {
     id: faker.string.uuid(),
     title: faker.word.words({ count: { min: 1, max: 4 } }),
     text: faker.lorem.sentences({ min: i, max: 20 }),
-    schedule_send_for: i % 3 == 0 ? faker.date.future() : faker.date.recent(),
-    broadcasted_at: i % 3 != 0 ? faker.date.recent() : null,
-    created_at: faker.date.recent(),
-    updated_at: faker.date.recent(),
-    user: {
-      connect: {
-        id: users[0].id,
-      },
-    },
-    tags: {
-      connect: {
-        name: tags[0].name,
-      },
-    },
+    schedule_send_for: i % 3 == 0 ? faker.date.future().toISOString() : faker.date.recent().toISOString(),
+    broadcasted_at: i % 3 != 0 ? faker.date.recent().toISOString() : null,
+    created_at: faker.date.recent().toISOString(),
+    updated_at: faker.date.recent().toISOString(),
   };
 });

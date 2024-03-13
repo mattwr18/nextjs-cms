@@ -80,7 +80,7 @@ async function main() {
           await prisma.request.create({
             data: {
               ...request,
-              user: { connect: { id: user.id } },
+              user: { connect: { id: user.id }},
             },
           });
           await prisma.$disconnect();
