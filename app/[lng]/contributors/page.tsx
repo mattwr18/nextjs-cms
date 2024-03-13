@@ -1,9 +1,6 @@
 import { useTranslation } from '@/app/i18n';
 import { getClient } from '@/app/lib/ApolloClient';
-import {
-  findManyContributor,
-  contributorsCount,
-} from '@/app/api/graphql/queries';
+import { contributorsCount } from '@/app/api/graphql/queries';
 import PageHeader from '@/app/[lng]/ui/PageHeader';
 import CopyButton from '@/app/[lng]/ui/CopyButton';
 import ContributorsList from '@/app/[lng]/ui/ContributorsList';
@@ -18,8 +15,8 @@ export default async function Page({
   };
   params: { lng: string };
 }) {
-  const { t } = await useTranslation(lng, 'contributors');
   const query = searchParams?.state || '';
+  const { t } = await useTranslation(lng, 'contributors');
   const [
     {
       data: { countContributor: activeContributorsCount },
@@ -45,22 +42,6 @@ export default async function Page({
     }),
   ]);
 
-  const where = () => {
-    switch (query) {
-      case 'inactive':
-        return { deactivated_at: { not: null } };
-      case 'unsubscribed':
-        return { unsubscribed_at: { not: null } };
-      default:
-        return { deactivated_at: null, unsubscribed_at: null };
-    }
-  };
-  const {
-    data: { findManyContributor: contributors },
-  } = await getClient().query({
-    query: findManyContributor,
-    variables: { where: where() },
-  });
   const tabBarItems = [
     {
       name: t('tab-bar-items.active'),
@@ -90,7 +71,7 @@ export default async function Page({
         <CopyButton text={t('copy-button-text')} />
       </PageHeader>
       <section className={styles.contributorsListSection}>
-        <ContributorsList contributors={contributors} lng={lng} />
+        <ContributorsList query={query} lng={lng} />
       </section>
     </main>
   );

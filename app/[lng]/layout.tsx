@@ -8,7 +8,7 @@ import '@/app/globals.scss';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return languages.map((lng) => ({ lng }));
 }
 

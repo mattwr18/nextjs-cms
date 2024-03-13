@@ -20,5 +20,6 @@
       },
       "submit-button": "Frage an die Community senden"
     }
-  }
+  },
+  "not-found": "Oh nein, wir konnten diese Frage nicht finden."
 }

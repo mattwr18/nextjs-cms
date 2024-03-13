@@ -2,14 +2,22 @@ import Link from 'next/link';
 import { useTranslation } from '@/app/i18n';
 import { fullName, contributorChannels } from '@/app/lib/utils';
 import Avatar from './Avatar';
-import { Contributor } from '@/app/lib/definitions';
 import styles from './ContributorRow.module.scss';
 
 export default async function ContributorRow({
   contributor,
   lng,
 }: {
-  contributor: Contributor;
+  contributor: {
+    id: string;
+    first_name: string;
+    last_name: string;
+    email?: string | null | undefined;
+    signal_phone_number?: string | null;
+    telegram_id?: bigint | null;
+    threema_id?: string | null;
+    whats_app_phone_number?: string | null;
+  };
   lng: string;
 }) {
   const { t } = await useTranslation(lng, 'contributor');

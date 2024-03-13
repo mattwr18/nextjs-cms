@@ -18,6 +18,13 @@ export default async function Page({
     query: findUniqueContributor,
     variables: { where: { id } },
   });
+  if (!contributor) {
+    return (
+      <main>
+        <h1>{t('not-found')}</h1>
+      </main>
+    );
+  }
   return (
     <main className={styles.main}>
       <header className={styles.pageHeader}>

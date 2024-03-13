@@ -20,5 +20,6 @@
       },
       "submit-button": "Send a question to the community"
     }
-  }
+  },
+  "not-found": "Oh no, we couldn't find that request."
 }

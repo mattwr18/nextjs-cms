@@ -4,6 +4,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
   extends: ['eslint:recommended', 'next/core-web-vitals', 'prettier'],
+  ignorePatterns: ['graphql/generated/*'],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],

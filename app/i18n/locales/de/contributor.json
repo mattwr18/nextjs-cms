@@ -1,5 +1,6 @@
 {
   "channel": "via {{channel}}",
   "contributor-since-date": "Mitglied seit {{date}}",
-  "edit-main-info": "Stammdaten bearbeiten"
+  "edit-main-info": "Stammdaten bearbeiten",
+  "not-found": "Oh nein, wir konnten dieses Mitglied nicht finden."
 }

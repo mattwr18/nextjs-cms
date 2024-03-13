@@ -1,12 +1,16 @@
 import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcrypt';
+import { parseArgs } from 'node:util';
 import {
   users,
   tags,
-  contributors,
-  requests,
+  emailContributors,
+  telegramContributors,
+  signalContributors,
+  whatsAppContributors,
+  sentRequests,
+  plannedRequests,
 } from '../app/lib/placeholder-data';
-import bcrypt from 'bcrypt';
-import { parseArgs } from 'node:util';
 
 const prisma = new PrismaClient();
 
@@ -22,17 +26,20 @@ async function main() {
   } = parseArgs({ options });
 
   switch (model) {
-    case 'users':
-      users.map(async (user) => {
-        const hashedPassword = await bcrypt.hash(user.password, 10);
-        await prisma.user.create({
-          data: {
-            ...user,
-            password: hashedPassword,
-          },
-        });
-      });
+    case 'users': {
+      await Promise.all([
+        users.map(async (user) => {
+          const hashedPassword = await bcrypt.hash(user.password, 10);
+          await prisma.user.create({
+            data: {
+              ...user,
+              password: hashedPassword,
+            },
+          });
+        }),
+      ]);
       break;
+    }
     case 'tags':
       await prisma.$transaction(
         tags.map((tag) =>
@@ -44,23 +51,53 @@ async function main() {
         ),
       );
       break;
-    case 'contributors':
-      contributors.map(async (contributor) => {
-        await prisma.contributor.create({ data: contributor });
-      });
+    case 'contributors': {
+      await Promise.all([
+        emailContributors.map(
+          async (contributor) =>
+            await prisma.contributor.create({ data: contributor }),
+        ),
+        telegramContributors.map(
+          async (contributor) =>
+            await prisma.contributor.create({ data: contributor }),
+        ),
+        signalContributors.map(
+          async (contributor) =>
+            await prisma.contributor.create({ data: contributor }),
+        ),
+        whatsAppContributors.map(
+          async (contributor) =>
+            await prisma.contributor.create({ data: contributor }),
+        ),
+      ]);
       break;
-    case 'requests':
+    }
+    case 'requests': {
       const user = await prisma.user.findFirstOrThrow();
-      requests.map(async (request) => {
-        await prisma.$connect();
-        await prisma.request.create({
-          data: {
-            ...request,
-            user: { connect: { id: user.id } },
-          },
-        });
-        await prisma.$disconnect();
-      });
+      await Promise.all([
+        sentRequests.map(async (request) => {
+          await prisma.$connect();
+          await prisma.request.create({
+            data: {
+              ...request,
+              user: { connect: { id: user.id } },
+            },
+          });
+          await prisma.$disconnect();
+        }),
+        plannedRequests.map(async (request) => {
+          await prisma.$connect();
+          await prisma.request.create({
+            data: {
+              ...request,
+              user: { connect: { id: user.id } },
+            },
+          });
+          await prisma.$disconnect();
+        }),
+      ]);
+      break;
+    }
     default:
       break;
   }
@@ -71,6 +108,7 @@ main()
     console.error(error);
     process.exit(1);
   })
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
   .finally(async () => {
     await prisma.$disconnect();
   });

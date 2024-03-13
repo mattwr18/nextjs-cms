@@ -9,6 +9,16 @@ export default function LanguageSwitcher({ lng }: { lng: string }) {
   const regexFromMyArray = new RegExp(languages.join('|'), 'gi');
   const searchParams = useSearchParams();
 
+  const newPath = (l: string) => {
+    const clonedPathname = pathname;
+    const params = searchParams.toString();
+
+    if (searchParams) {
+      return `${clonedPathname.replace(regexFromMyArray, l)}?${params}`;
+    }
+    return `${clonedPathname.replace(regexFromMyArray, l)}`;
+  };
+
   return (
     <>
       {languages
@@ -17,11 +27,7 @@ export default function LanguageSwitcher({ lng }: { lng: string }) {
           return (
             <span key={l}>
               {index > 0 && ' or '}
-              <Link
-                href={`${pathname.replace(regexFromMyArray, l)}?${searchParams}`}
-              >
-                {l}
-              </Link>
+              <Link href={newPath(l)}>{l}</Link>
             </span>
           );
         })}

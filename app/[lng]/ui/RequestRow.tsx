@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { useTranslation } from '@/app/i18n';
-import { Request } from '@/app/lib/definitions';
 import Card from './Card';
 import styles from './RequestRow.module.scss';
 
@@ -8,7 +7,13 @@ export default async function RequestRow({
   request: { id, title, text, broadcasted_at, schedule_send_for },
   lng,
 }: {
-  request: Request;
+  request: {
+    id: string;
+    title: string;
+    text?: string | null | undefined;
+    broadcasted_at?: string | null | undefined;
+    schedule_send_for: string;
+  };
   lng: string;
 }) {
   const { t } = await useTranslation(lng, 'request');
@@ -41,7 +46,7 @@ export default async function RequestRow({
     <Link href={`/${lng}/requests/${id}`} className={styles.row}>
       <Card>
         <h2>{title}</h2>
-        <p className={styles.textWrapper}>{text}</p>
+        {text && <p className={styles.textWrapper}>{text}</p>}
         <footer>
           <p>{footerText()}</p>
         </footer>

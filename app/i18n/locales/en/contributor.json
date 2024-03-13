@@ -1,5 +1,6 @@
 {
   "channel": "with {{channel}}",
   "contributor-since-date": "Contributor since {{date}}",
-  "edit-main-info": "Edit main info"
+  "edit-main-info": "Edit main info",
+  "not-found": "Oh no, we couldn't find that contributor."
 }
