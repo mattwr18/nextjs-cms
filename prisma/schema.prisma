@@ -14,9 +14,9 @@ generator pothos {
   output = "./pothos-types.ts"
 }
 
-generator pothosCrud {
-  provider = "prisma-generator-pothos-codegen"
-}
+// generator pothosCrud {
+//   provider = "prisma-generator-pothos-codegen"
+// }
 
 datasource db {
   provider = "postgresql"
